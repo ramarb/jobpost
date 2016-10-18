@@ -12,6 +12,8 @@ class MY_Controller extends CI_Controller {
 	private $_unit = 'desktop';
 	
 	public $user = '';
+    public $js_header = '';
+    public $js_footer = '';
 	
 	/**
 	 * __construct()
@@ -27,22 +29,24 @@ class MY_Controller extends CI_Controller {
 	public function render($body, $data){
 		
 		$role = ((isset($this->user->role_name) === true)?$this->user->role_name:"");
-		
-        $this->switch_header($role);
-        $this->load->view($this->_unit . '/' . $body, $data);
+		$data['javascripts_header'] = $this->js_header;
+        $data['javascripts_footer'] = $this->js_footer;
+        $this->switch_header($role,$data);
+        $this->load->view($this->_unit . '/' . $body);
         $this->load->view($this->_unit . '/common/footer');
     }
 	
-	private function switch_header($role){
+	private function switch_header($role,$data){
+        $data['role'] = $role;
 		switch ($role) {
 			case 'Employer':
-				$this->load->view($this->_unit . '/employer/header',array('role'=>$role));					
+				$this->load->view($this->_unit . '/employer/header',$data);
 				break;
 			case 'Moderator':
-				$this->load->view($this->_unit . '/moderator/header',array('role'=>$role));					
+				$this->load->view($this->_unit . '/moderator/header',$data);
 				break;	
 			default:
-				$this->load->view($this->_unit . '/common/header');		
+				$this->load->view($this->_unit . '/common/header',$data);
 				break;
 		}
 	}
@@ -72,6 +76,8 @@ class MY_Controller_Employer extends MY_Controller {
 	private $_unit = 'desktop';
 	public $user = '';
 	public $_role = 'employer';
+    public $js_header = '';
+    public $js_footer = '';
 
 	/**
 	 * Load all the common models and libraries here.
@@ -91,7 +97,8 @@ class MY_Controller_Employer extends MY_Controller {
 	}
 	
 	public function render($body, $data){
-		
+        $data['javascripts_header'] = $this->js_header;
+        $data['javascripts_footer'] = $this->js_footer;
 		$this->load->view($this->_unit . '/' . $this->_role . '/header',$data);
         $this->load->view($this->_unit . '/' . $body);
         $this->load->view($this->_unit . '/' . $this->_role . '/footer');	
@@ -125,6 +132,8 @@ class MY_Controller_Moderator extends MY_Controller {
 	public $user = '';
 	
 	public $_role = 'moderator';
+    public $js_header = '';
+    public $js_footer = '';
 
 	/**
 	 * Load all the common models and libraries here.
@@ -144,7 +153,9 @@ class MY_Controller_Moderator extends MY_Controller {
 	}
 	
 	public function render($body, $data){
-		
+
+        $data['javascripts_header'] = $this->js_header;
+        $data['javascripts_footer'] = $this->js_footer;
 		$this->load->view($this->_unit . '/' . $this->_role . '/header',$data);
         $this->load->view($this->_unit . '/' . $body);
         $this->load->view($this->_unit . '/' . $this->_role . '/footer');	

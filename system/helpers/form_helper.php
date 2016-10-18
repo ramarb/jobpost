@@ -999,9 +999,3 @@ if ( ! function_exists('_get_validation_object'))
 	}
 }
 
-function p($expression,$exit = false){
-	echo '<pre>';
-	print_r($expression);
-	echo '</pre>';
-	if($exit)die;
-}

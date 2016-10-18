@@ -158,7 +158,11 @@ class Vacancies extends MY_Controller_Moderator {
             )
         );
 	}
-	
+
+    /**
+     * @param $type
+     * @param int $vacancy_id
+     */
 	private function validate($type, $vacancy_id = 0){
 		$config = $this->vacancy_validation_conf();
 

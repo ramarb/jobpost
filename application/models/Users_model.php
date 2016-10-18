@@ -7,6 +7,9 @@ class Users_model extends CI_Model {
         parent::__construct();
     }
 
+    /**
+     * @param $data
+     */
     public function create($data){
     	
         $sql = "CALL sp_user_create(
@@ -19,18 +22,15 @@ class Users_model extends CI_Model {
         	@message,
         	@return_id
         )";
-		
+
 		$this->common($sql);
-		
-		$result = $this->common("SELECT @message alert");
-		
-		$result = $result->row();
-		
-		if($result->alert == 'Duplicate'){
-			throw new UnexpectedValueException('Email alreary exist!');
-		}
+
+        $this->check_sp_result();
     }
-	
+
+    /**
+     * @param $data
+     */
 	public function update($data){
 		
 		$sql = "
@@ -47,16 +47,14 @@ class Users_model extends CI_Model {
         )";
 		
 		$this->common($sql);
-		
-		$result = $this->common("SELECT @message alert");
-		
-		$result = $result->row();
-		
-		if($result->alert == 'Duplicate'){
-			throw new UnexpectedValueException('Email alreary exist!');
-		}
+
+        $this->check_sp_result();
 	}
-	
+
+    /**
+     * @param $user_id
+     * @return string
+     */
 	public function read_row($user_id){
 		$sql = "
 			SELECT 
@@ -86,7 +84,15 @@ class Users_model extends CI_Model {
 		return $return;
 		
 	}
-	
+
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @param bool $count
+     * @param string $sort
+     * @param string $order
+     * @return array
+     */
 	public	function read($limit = 0, $offset = 0, $count = false, $sort = '', $order = ''){
 		
 		$limit_ = "LIMIT {$offset}, {$limit}";	
@@ -126,7 +132,11 @@ class Users_model extends CI_Model {
 		
 		return $return;
 	}
-	
+
+    /**
+     * @param $data
+     * @return bool
+     */
 	public function authenticate($data){
 		
 		$return = false;
@@ -160,24 +170,25 @@ class Users_model extends CI_Model {
 	}
 
     /**
-     * @param string $sql
-     * @throws InvalidArgumentException if $sql is not string
-     * @throws RuntimeException if query fails
-     * @return array
+     * @param $users_id
+     * @param $vacancies_id
      */
-    private function common($sql){
+    public function create_vacancy_applicant_create($users_id,$vacancies_id){
+        check_int($users_id,'user_id');
+        check_int($vacancies_id,'vacancies_id');
 
-        if(is_string($sql) === false || strlen(trim($sql)) < 1){
-            throw new InvalidArgumentException('Invalid parameter $sql passed, must be a string', 400);
-        }
+        $sql = "CALL sp_vacancy_applicant_create(
+            " . $this->db->escape($users_id) . ",
+			" . $this->db->escape($vacancies_id) . ",
+			@message,
+        	@return_id
+        )";
 
-        $res = $this->db->query($sql);
-
-        if(isset($res->conn_id) == false){
-            throw new RuntimeException('Internal query fail! ' . $sql, 400);
-        }
-
-        return $res;
+        $this->common($sql);
+        $this->check_sp_result();
     }
+
+
+
 
 }

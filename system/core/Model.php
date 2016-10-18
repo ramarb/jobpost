@@ -77,4 +77,35 @@ class CI_Model {
 		return get_instance()->$key;
 	}
 
+    public function check_sp_result(){
+        $result = $this->common("SELECT @message alert");
+
+        $result = $result->row();
+
+        if($result->alert !== 'Success'){
+            throw new UnexpectedValueException($result->alert);
+        }
+    }
+
+    /**
+     * @param string $sql
+     * @throws InvalidArgumentException if $sql is not string
+     * @throws RuntimeException if query fails
+     * @return array
+     */
+    public function common($sql){
+
+        if(is_string($sql) === false || strlen(trim($sql)) < 1){
+            throw new InvalidArgumentException('Invalid parameter $sql passed, must be a string', 400);
+        }
+
+        $res = $this->db->query($sql);
+
+        if(isset($res->conn_id) == false){
+            throw new RuntimeException('Internal query fail! ' . $sql, 400);
+        }
+
+        return $res;
+    }
+
 }

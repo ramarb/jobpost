@@ -58,6 +58,10 @@ class Miscellaneous_model extends CI_Model {
 	public function read_industries(){
 		return $this->common("SELECT * FROM job_industries");
 	}
+
+    public function read_provinces(){
+        return $this->common("SELECT * FROM provinces;");
+    }
 	
 	public function read_provinces_cities(){
 		$sql = "
@@ -73,7 +77,7 @@ class Miscellaneous_model extends CI_Model {
 		
 		return $this->common($sql);	
 	}
-	
+
 	public function read_industry_categories(){
     	$sql = "
     		SELECT
@@ -89,26 +93,6 @@ class Miscellaneous_model extends CI_Model {
 		return $this->common($sql);
     }
 	
-	/**
-     * @param string $sql
-     * @throws InvalidArgumentException if $sql is not string
-     * @throws RuntimeException if query fails
-     * @return array
-     */
-    private function common($sql){
 
-        if(is_string($sql) === false || strlen(trim($sql)) < 1){
-            throw new InvalidArgumentException('Invalid parameter $sql passed, must be a string', 400);
-        }
-
-        $res = $this->db->query($sql);
-
-        if(isset($res->conn_id) == false){
-            throw new RuntimeException('Internal query fail! ' . $sql, 400);
-        }
-
-        return $res;
-    }
-	
 	
 }

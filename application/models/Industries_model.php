@@ -28,14 +28,8 @@ class Industries_model extends CI_Model {
 		)";
 		
 		$this->common($sql);
-		
-		$result = $this->common("SELECT @message alert");
-		
-		$result = $result->row();
-		
-		if($result->alert == 'Duplicate'){
-			throw new UnexpectedValueException('Industry '.$industry.' alreary exist!');
-		}
+
+        $this->check_sp_result();
 	}
 	
 	public function update($id, $industry){
@@ -47,14 +41,8 @@ class Industries_model extends CI_Model {
 		)";
 		
 		$this->common($sql);
-		
-		$result = $this->common("SELECT @message alert");
-		
-		$result = $result->row();
-		
-		if($result->alert == 'Duplicate'){
-			throw new UnexpectedValueException('Industry '.$industry.' alreary exist!');
-		}
+
+        $this->check_sp_result();
 	}
 	
 	public function delete($id){
@@ -91,24 +79,5 @@ class Industries_model extends CI_Model {
 		return $return;
 	}
 	
-	/**
-     * @param string $sql
-     * @throws InvalidArgumentException if $sql is not string
-     * @throws RuntimeException if query fails
-     * @return array
-     */
-    private function common($sql){
 
-        if(is_string($sql) === false || strlen(trim($sql)) < 1){
-            throw new InvalidArgumentException('Invalid parameter $sql passed, must be a string', 400);
-        }
-
-        $res = $this->db->query($sql);
-
-        if(!$res){
-            throw new RuntimeException('Internal query fail! ' . $sql, 400);
-        }
-
-        return $res;
-    }
 }

@@ -87,3 +87,5 @@ define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 define('LIST_LIMIT', 5);
 define('PUBLIC_LIST_LIMIT', 10);
+define('DOCUMENT_ROOT',$_SERVER['DOCUMENT_ROOT'] . '/');
+define('UPLOAD_PATH', DOCUMENT_ROOT.'php_uploads' . '/');

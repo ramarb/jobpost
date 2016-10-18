@@ -12,9 +12,10 @@
 
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery-1.11.2.min.js')?>"> </script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/bootstrap.min.js')?>"> </script>
+    <?php echo $javascripts_header?>
 </head>
 <body>
-<div class="container">
+<div class="container" ng-app="jobBoard" ng-controller="jobBoardCtrl">
     <div class="row container-entry-form">
 
         <?php

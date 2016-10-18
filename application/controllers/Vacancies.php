@@ -44,12 +44,9 @@ class Vacancies extends MY_Controller {
     }
 	
 	public function index(){
-		//read_by_public($keyword = '', $limit = 0, $offset = 0, $count = false, $sort = '', $order = ''){
-		//p($this->vacancies->read_by_public('',10,0,false,$this->_sort,$this->order)->result());
 		
 		$this->mylist();
-		
-		
+
 	}
 		
 	public function mylist($offset = 0){
@@ -63,16 +60,24 @@ class Vacancies extends MY_Controller {
 			$this->load->library('pagination');
 			
 			$config = array();
-			
+
+//            $this->keyword = array(
+//                'provinces_id'=>'1'
+//            );
+            $this->keyword = $this->get_filters();
+
+
 			$config['base_url'] = base_url('vacancies/mylist/');
 			$config['total_rows'] = (int)$this->vacancies->read_by_public($this->keyword,5,0,true);
 			$config['per_page'] = PUBLIC_LIST_LIMIT;
 			$config = array_merge($this->miscellaneous->pagination_config(),$config);
 			
 			$this->pagination->initialize($config);
-			
-			$vacancies = $this->vacancies->read_by_public($this->keyword,PUBLIC_LIST_LIMIT,$offset,false,$this->_sort,$this->order);
-			
+
+
+
+            $vacancies = $this->vacancies->read_by_public($this->keyword,PUBLIC_LIST_LIMIT,$offset,false,$this->_sort,$this->order);
+
 		}catch(Exception $e){
 			$this->_alert_message = $e->getMessage();
 			$this->_alert_type = 'warning';
@@ -83,6 +88,11 @@ class Vacancies extends MY_Controller {
 			'alert_type' => $this->_alert_type,
 			'pagination' => $this->pagination->create_links(),
 		);
+
+        $data['form_data'] = json_encode($this->keyword);
+
+        $this->js_header = javascript(array('angular.min','constants'));
+        $this->js_footer = javascript(array('public_vacancy'));
 		$this->render('public/vacancy_list', $data);
 	}
 	
@@ -91,7 +101,7 @@ class Vacancies extends MY_Controller {
 		//p($keyword,1);
 		$this->session->set_userdata('public_vacancy_keyword',$keyword);
 		$this->keyword = $keyword;
-		$this->mylist();
+		redirect('vacancies');
 	}	
 
 	public function detail(){
@@ -103,4 +113,63 @@ class Vacancies extends MY_Controller {
 		);
 		$this->render('public/vacancy_detail', $data);
 	}
+
+    public function filter(){
+
+        if($this->input->post('do_clear') === '1'){
+            $this->session->set_userdata('filter_provinces_id','');
+            $this->session->set_userdata('filter_cities_id','');
+            $this->session->set_userdata('filter_job_industries_id','');
+            $this->session->set_userdata('filter_job_categories_id','');
+        }else{
+            $this->session->set_userdata('filter_provinces_id',$this->input->post('provinces_id'));
+            $this->session->set_userdata('filter_cities_id',$this->input->post('cities_id'));
+            $this->session->set_userdata('filter_job_industries_id',$this->input->post('job_industries_id'));
+            $this->session->set_userdata('filter_job_categories_id',$this->input->post('job_categories_id'));
+        }
+
+        redirect('vacancies');
+    }
+
+    private function get_filters(){
+        return array(
+            'provinces_id'      => $this->session->userdata('filter_provinces_id'),
+            'cities_id'         => $this->session->userdata('filter_cities_id'),
+            'job_industries_id' => $this->session->userdata('filter_job_industries_id'),
+            'job_categories_id' => $this->session->userdata('filter_job_categories_id'),
+            'keyword'           => $this->session->userdata('public_vacancy_keyword')
+        );
+    }
+
+    public function test(){
+       // die('young');
+        $data = array(
+            'index' => 'file',
+            'move_to' => '6/images/thumb/'
+        );
+
+        if(isset($_FILES['file'])){
+            $this->load->library('file_management',$data,'file');
+
+            if(count($this->file->get_file_uploaded()) > 0){
+                $this->file->move();
+                p($this->file->get_result());
+            }
+        }
+
+        $this->load->view('testing');
+
+//        die;//==================================================================
+//
+//
+//        try{
+//            $this->users->create_vacancy_applicant_create(14,2);
+//        }catch(Exception $e){
+//            die($e->getMessage());
+//        }
+//
+//        die;//==================================================================
+
+
+    }
 }

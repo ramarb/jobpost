@@ -24,7 +24,7 @@ class Vacancies_model extends CI_Model {
 	
 	public function create($user_id, $data){
 		
-		 $sql = "CALL sp_create_vacancy(
+		 $sql = "CALL sp_vacancy_create(
 		 	".$this->db->escape($user_id).",
 		 	".$this->db->escape($data['category']).",
 		 	".$this->db->escape($data['city']).",
@@ -33,11 +33,11 @@ class Vacancies_model extends CI_Model {
 		 	".$this->db->escape($data['description']).",
 		 	".$this->db->escape($data['salary']).",
 		 	".$this->db->escape($data['address']).",
-		 	@alert_message,
+		 	@message,
 		 	@return_id	
 		 )";
-		 
-		 return $this->common($sql);
+		 $this->common($sql);
+         $this->check_sp_result();
 		 
 	}
 	
@@ -52,7 +52,6 @@ class Vacancies_model extends CI_Model {
 		$sql = "
 			UPDATE vacancies 
 			SET
-				
 				job_categories_id = ".$this->db->escape($data['category']).",
 				cities_id = ".$this->db->escape($data['city']).",
 				address = ".$this->db->escape($data['address']).",
@@ -223,8 +222,6 @@ class Vacancies_model extends CI_Model {
 		if($count === true){
 			$row = $return->row();
 			$return = $row->total;
-		}else{
-			//p($sql,1);
 		}
 		
 		return $return;
@@ -234,10 +231,50 @@ class Vacancies_model extends CI_Model {
 			
 		$limit_ = "LIMIT {$offset}, {$limit}";	
 		$order = "ORDER BY {$sort} {$order}";
-		$where = '';
+        $where = array();
+
+        if(is_array($keyword) === true && count($keyword) > 0){
+
+            if(isset($keyword['provinces_id']) === true &&  (int)$keyword['provinces_id'] > 0){
+                $provinces_id = (int)$keyword['provinces_id'];
+                $where[] = "cities.id IN(
+                    SELECT id FROM cities WHERE cities.provinces_id = {$provinces_id}
+                )";
+            }
+
+            if(isset($keyword['cities_id']) === true &&  (int)$keyword['cities_id'] > 0){
+                $cities_id = (int)$keyword['cities_id'];
+                $where[] = "cities.id = {$cities_id}";
+            }
+
+            if(isset($keyword['job_industries_id']) === true &&  (int)$keyword['job_industries_id'] > 0){
+                $job_industries_id = (int)$keyword['job_industries_id'];
+                $where[] = "job_categories.id IN(
+                    SELECT id FROM job_categories WHERE job_categories.job_industries_id = {$job_industries_id}
+                )";
+            }
+
+            if(isset($keyword['job_categories_id']) === true &&  (int)$keyword['job_categories_id'] > 0){
+                $job_categories_id = (int)$keyword['job_categories_id'];
+                $where[] = "job_categories_id = {$job_categories_id}";
+            }
+
+            if(isset($keyword['keyword']) === true){
+                $keyword = $keyword['keyword'];
+            }else{
+                $keyword = '';
+            }
+        }
+
 		if(strlen(trim($keyword))>0){
-			$where = "WHERE MATCH(vacancies.title, vacancies.description, vacancies.company, job_categories.name, job_industries.name) AGAINST(".$this->db->escape($keyword)." IN BOOLEAN MODE)";	
+			$where[] = "MATCH(vacancies.title, vacancies.description, vacancies.company, job_categories.name, job_industries.name) AGAINST(".$this->db->escape($keyword)." IN BOOLEAN MODE)";
 		}
+
+        if(count($where) > 0){
+            $where = "WHERE " . implode(" AND ", $where);
+        }else{
+            $where = '';
+        }
 		
 		$select = "
 				vacancies.*,
@@ -266,7 +303,10 @@ class Vacancies_model extends CI_Model {
 			{$order}
 			{$limit_}
 		";
-		
+        if(!$count){
+        //    p($sql,1);
+        }
+
 		$return = $this->common($sql);
 		
 		if($count === true){
@@ -279,25 +319,6 @@ class Vacancies_model extends CI_Model {
 		return $return;
 	}
 
-    /**
-     * @param string $sql
-     * @throws InvalidArgumentException if $sql is not string
-     * @throws RuntimeException if query fails
-     * @return array
-     */
-    private function common($sql){
 
-        if(is_string($sql) === false || strlen(trim($sql)) < 1){
-            throw new InvalidArgumentException('Invalid parameter $sql passed, must be a string', 400);
-        }
-
-        $res = $this->db->query($sql);
-		
-        if(!$res){
-            throw new RuntimeException('Internal query fail! ' . $sql, 400);
-        }
-
-        return $res;
-    }
 
 }

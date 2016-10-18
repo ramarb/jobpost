@@ -18,7 +18,7 @@
 --
 -- Table structure for table `cities`
 --
-USE jobboard;
+USE eugene;
 
 DROP TABLE IF EXISTS `cities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

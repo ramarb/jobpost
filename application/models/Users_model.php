@@ -188,7 +188,104 @@ class Users_model extends CI_Model {
         $this->check_sp_result();
     }
 
+    /**
+     * @param $users_id
+     * @param $position
+     * @param $year_from
+     * @param $month_from
+     * @param $year_to
+     * @param $month_to
+     * @param $is_present
+     * @param $monthly_salary
+     * @param $company
+     * @param $description
+     * @return array
+     */
+    public function create_user_work_experience($users_id,$position,$year_from,$month_from,$year_to,$month_to,$is_present,$monthly_salary,$company,$description){
+        /**
+         * id	int(11)	NO	PRI		auto_increment
+        users_id	int(11)	NO	MUL
+        position	varchar(250)	YES
+        year_from	varchar(5)	YES
+        month_from	varchar(45)	YES
+        year_to	varchar(5)	YES
+        month_to	varchar(45)	YES
+        is_present	int(11)	YES
+        monthly_salary	float	YES
+        company	varchar(250)	YES
+        description	int(11)	YES
+
+         */
+        $fields = array('users_id','position','year_from','month_from','year_to','month_to','is_present','monthly_salary','company','description');
+
+        foreach($fields as $index => $value){
+            if($value === 'users_id'){
+                check_int($$value, $value);
+            }else{
+                check_string($$value, $value);
+            }
+        }
 
 
+        $sql = "INSERT INTO user_work_experieces(users_id,position,year_from,month_from,year_to,month_to,is_present,monthly_salary,company,description)
+            VALUES(
+                ".$this->db->escape($users_id).",
+                ".$this->db->escape($position).",
+                ".$this->db->escape($year_from).",
+                ".$this->db->escape($month_from).",
+                ".$this->db->escape($year_to).",
+                ".$this->db->escape($month_to).",
+                ".$this->db->escape($is_present).",
+                ".$this->db->escape($monthly_salary).",
+                ".$this->db->escape($company).",
+                ".$this->db->escape($description)."
+            );";
+
+        return $this->common($sql);
+    }
+
+    /**
+     * @param $id
+     * @param $data
+     * @return array
+     */
+    public function update_user_work_experience($id,$data){
+
+        check_int($id,'id');
+
+        foreach($data as $index => $value){
+            if($value === 'users_id'){
+                check_int($value, $index);
+            }else{
+                check_string($value, $index);
+            }
+        }
+        $sql = "UPDATE user_work_experieces
+            SET
+                users_id = ".$this->db->escape($data['users_id']).",
+                position = ".$this->db->escape($data['position']).",
+                year_from = ".$this->db->escape($data['year_from']).",
+                month_from = ".$this->db->escape($data['month_from']).",
+                year_to = ".$this->db->escape($data['year_to']).",
+                month_to = ".$this->db->escape($data['month_to']).",
+                is_present = ".$this->db->escape($data['is_present']).",
+                monthly_salary = ".$this->db->escape($data['monthly_salary']).",
+                company = ".$this->db->escape($data['company']).",
+                description = ".$this->db->escape($data['description'])."
+            WHERE id = ".$this->db->escape($id)."
+        ";
+
+        return $this->common($sql);
+
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function  delete_user_work_experience($id){
+        check_int($id,'id');
+        return $this->common("DELETE FROM user_work_experieces WHERE id = " . $this->db->escape($id) . " LIMIT 1;");
+    }
 
 }

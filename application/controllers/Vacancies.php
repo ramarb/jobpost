@@ -141,35 +141,4 @@ class Vacancies extends MY_Controller {
         );
     }
 
-    public function test(){
-       // die('young');
-        $data = array(
-            'index' => 'file',
-            'move_to' => '6/images/thumb/'
-        );
-
-        if(isset($_FILES['file'])){
-            $this->load->library('file_management',$data,'file');
-
-            if(count($this->file->get_file_uploaded()) > 0){
-                $this->file->move();
-                p($this->file->get_result());
-            }
-        }
-
-        $this->load->view('testing');
-
-//        die;//==================================================================
-//
-//
-//        try{
-//            $this->users->create_vacancy_applicant_create(14,2);
-//        }catch(Exception $e){
-//            die($e->getMessage());
-//        }
-//
-//        die;//==================================================================
-
-
-    }
 }

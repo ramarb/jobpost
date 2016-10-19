@@ -28,7 +28,7 @@ function check_int_allow_null($param, $param_name){
 	}
 }
 
-function check_int($param, $param_name){
+function check_int($param, $param_name = 'param_name'){
 	if($param !== '' && (int)$param < 1){
 		throw new InvalidArgumentException($param_name.' must be int greater than zero',500);
 	}

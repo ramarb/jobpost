@@ -101,7 +101,7 @@ class CI_Model {
 
         $res = $this->db->query($sql);
 
-        if(isset($res->conn_id) == false){
+        if(!$res){
             throw new RuntimeException('Internal query fail! ' . $sql, 400);
         }
 

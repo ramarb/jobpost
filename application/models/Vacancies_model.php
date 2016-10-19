@@ -303,22 +303,15 @@ class Vacancies_model extends CI_Model {
 			{$order}
 			{$limit_}
 		";
-        if(!$count){
-        //    p($sql,1);
-        }
 
 		$return = $this->common($sql);
 		
 		if($count === true){
 			$row = $return->row();
 			$return = $row->total;
-		}else{
-			//p($sql,1);
 		}
 		
 		return $return;
 	}
-
-
 
 }

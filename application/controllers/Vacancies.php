@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Vacancies extends MY_Controller {
 
-	private $_alert_message = '';
-    private $_alert_type = '';
+
 	private $_sort = 'date_added';
 	private $order = 'DESC';
 	private $keyword = '';
@@ -16,13 +15,9 @@ class Vacancies extends MY_Controller {
 		$this->load->model('Vacancies_model','vacancies');
 		$this->load->model('Miscellaneous_model','miscellaneous');
 		
-        if($this->session->flashdata('alert_type')){
-            $this->_alert_type = $this->session->flashdata('alert_type');
-        }
 
-        if($this->session->flashdata('alert_message')){
-            $this->_alert_message = $this->session->flashdata('alert_message');
-        }
+
+
 		
 		if(strlen(trim($this->session->userdata('public_vacancy_keyword')))>0){
 			$this->keyword = $this->session->userdata('public_vacancy_keyword');
@@ -61,11 +56,7 @@ class Vacancies extends MY_Controller {
 			
 			$config = array();
 
-//            $this->keyword = array(
-//                'provinces_id'=>'1'
-//            );
             $this->keyword = $this->get_filters();
-
 
 			$config['base_url'] = base_url('vacancies/mylist/');
 			$config['total_rows'] = (int)$this->vacancies->read_by_public($this->keyword,5,0,true);
@@ -74,18 +65,13 @@ class Vacancies extends MY_Controller {
 			
 			$this->pagination->initialize($config);
 
-
-
             $vacancies = $this->vacancies->read_by_public($this->keyword,PUBLIC_LIST_LIMIT,$offset,false,$this->_sort,$this->order);
 
 		}catch(Exception $e){
-			$this->_alert_message = $e->getMessage();
-			$this->_alert_type = 'warning';
+            $this->set_alert_message('warning',$e->getMessage());
 		}
 		$data = array(
 			'vacancies' => $vacancies,
-			'alert_message' => $this->_alert_message, 
-			'alert_type' => $this->_alert_type,
 			'pagination' => $this->pagination->create_links(),
 		);
 
@@ -93,26 +79,47 @@ class Vacancies extends MY_Controller {
 
         $this->js_header = javascript(array('angular.min','constants'));
         $this->js_footer = javascript(array('public_vacancy'));
+
 		$this->render('public/vacancy_list', $data);
 	}
 	
 	public function search(){
 		$keyword = $this->input->post('keyword');
-		//p($keyword,1);
 		$this->session->set_userdata('public_vacancy_keyword',$keyword);
 		$this->keyword = $keyword;
 		redirect('vacancies');
 	}	
 
 	public function detail(){
-		$vacancy = $this->vacancies->read_row_by_public($this->uri->segment(3));
+        $vacancies_id = $this->uri->segment(3);
+		$vacancy = $this->vacancies->read_row_by_public($vacancies_id);
 		$data = array(
 			'vacancy' => $vacancy,
-			'alert_message' => $this->_alert_message, 
-			'alert_type' => $this->_alert_type
+            'vacancies_id' => $vacancies_id,
+            'application_form' => $this->load->view($this->_unit.'/public/application_form',array('vacancies_id'=>$vacancies_id),true)
 		);
 		$this->render('public/vacancy_detail', $data);
 	}
+
+    public function apply(){
+        $user_id = $this->user->id;
+        $vacancies_id = $this->input->post('vacancies_id');
+        try{
+            $this->users->create_vacancy_applicant($user_id, $vacancies_id);
+
+            $this->set_alert_message('Success','You have successfully applied to this Job',true);
+
+            redirect('vacancies/detail/'.$vacancies_id);
+
+        }catch (Exception $e){
+
+            $this->set_alert_message('Error',$e->getMessage());
+        }
+
+        $this->detail();
+
+
+    }
 
     public function filter(){
 

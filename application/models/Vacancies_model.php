@@ -314,4 +314,35 @@ class Vacancies_model extends CI_Model {
 		return $return;
 	}
 
+    /**
+     * @param $users_id
+     * @return array
+     */
+    public function read_vacancy_applicant_by_employer($users_id){
+        check_int($users_id);
+        $sql = "SELECT
+                    vacancy_applicants.vacancies_id,
+                    vacancies.title,
+                    applicant_profile.first_name,
+                    applicant_profile.last_name,
+                    user_work_experieces.position,
+                    (SELECT files.id
+                        FROM files
+                        INNER JOIN user_files ON user_files.files_id = files.id
+                        WHERE user_files.users_id = applicant.id
+                        ORDER BY files.date_added DESC
+                        LIMIT 1
+                    ) AS resume_id
+
+                FROM vacancy_applicants
+                INNER JOIN vacancies ON vacancies.id = vacancy_applicants.vacancies_id
+                INNER JOIN users AS applicant ON applicant.id = vacancy_applicants.users_id
+                INNER JOIN user_profiles AS applicant_profile ON applicant_profile.users_id = applicant.id
+                LEFT JOIN user_work_experieces ON user_work_experieces.users_id = applicant.id AND user_work_experieces.is_present = 1
+                INNER JOIN users AS vacancy_owner ON vacancy_owner.id = vacancies.users_id";
+
+        return $this->common($sql);
+
+    }
+
 }

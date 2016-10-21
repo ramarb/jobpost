@@ -91,4 +91,4 @@ define('DOCUMENT_ROOT',$_SERVER['DOCUMENT_ROOT'] . '/');
 define('UPLOAD_PATH', DOCUMENT_ROOT.'php_uploads' . '/');
 define('USER_FILE_TYPE_PROFILE_PHOTO','Profile Photo');
 define('USER_FILE_TYPE_COMPANY_LOGO','Company Logo');
-define('USER_FILE_TYPE_RESUME','RESUME');
+define('USER_FILE_TYPE_RESUME','Resume');

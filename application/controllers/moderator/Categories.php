@@ -4,9 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Categories extends MY_Controller_Moderator {
 
 
-    private $_alert_message = '';
-    private $_alert_type = '';
-	private $_sort = 'name';
+    private $_sort = 'name';
 	private $order = 'ASC';
 
     public function __construct() {
@@ -14,15 +12,7 @@ class Categories extends MY_Controller_Moderator {
 		
 		$this->load->model('Categories_model', 'categories');
 		$this->load->model('Miscellaneous_model','miscellaneous');
-		
-        if($this->session->flashdata('alert_type')){
-            $this->_alert_type = $this->session->flashdata('alert_type');
-        }
 
-        if($this->session->flashdata('alert_message')){
-            $this->_alert_message = $this->session->flashdata('alert_message');
-        }
-		
 		$sort = $this->session->userdata('category_sort');
 		$order = $this->session->userdata('category_order');;
 		
@@ -57,8 +47,6 @@ class Categories extends MY_Controller_Moderator {
 		
 		$data = array(
 			'categories' => $categories,
-			'alert_message' => $this->_alert_message, 
-			'alert_type' => $this->_alert_type,
 			'pagination' => $this->pagination->create_links(),
 			'order' => $this->order,
 			'sort' => $this->_sort,
@@ -89,12 +77,7 @@ class Categories extends MY_Controller_Moderator {
 	}
 	
 	public function create(){
-		$data = array(
-			'alert_message' => $this->_alert_message, 
-			'alert_type' => $this->_alert_type,
-			'industries' => $this->miscellaneous->read_industries(), 
-			'role' => $this->_role,
-		);
+		$data = array('industries' => $this->miscellaneous->read_industries());
 		$this->render($this->_role . '/category_create',$data);
 	}
 	
@@ -109,7 +92,6 @@ class Categories extends MY_Controller_Moderator {
 		
 		$data = array_merge(
 			$result,
-			array('alert_message' => $this->_alert_message, 'alert_type' => $this->_alert_type, 'role' => $this->_role),
 			array('industries' => $this->miscellaneous->read_industries())
 		);
 		
@@ -148,8 +130,7 @@ class Categories extends MY_Controller_Moderator {
         $result = $this->form_validation->run();
 
         if($result == false){
-            $this->_alert_type = "Error";
-            $this->_alert_message = validation_errors();
+            $this->set_alert_message('Error',validation_errors());
         }else{
         	
 			switch ($type) {
@@ -192,12 +173,10 @@ class Categories extends MY_Controller_Moderator {
 					break;
 			}
 				
-			$this->session->set_flashdata('alert_type','Success');
-            $this->session->set_flashdata('alert_message',$alert_message);
+            $this->set_alert_message('Success',$alert_message,true);
 			redirect($this->_role . '/categories/mylist');
 		}catch(Exception $e){
-			$this->_alert_type = "Error";
-            $this->_alert_message = $e->getMessage();
+            $this->set_alert_message('Error',$e->getMessage());
 		}
 	}	
 

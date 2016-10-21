@@ -173,7 +173,7 @@ class Users_model extends CI_Model {
      * @param $users_id
      * @param $vacancies_id
      */
-    public function create_vacancy_applicant_create($users_id,$vacancies_id){
+    public function create_vacancy_applicant($users_id,$vacancies_id){
         check_int($users_id,'user_id');
         check_int($vacancies_id,'vacancies_id');
 

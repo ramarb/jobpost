@@ -153,6 +153,24 @@ class File_management {
         return $this->result;
     }
 
+    public function download($location, $name = '', $type = 'application/x-file-to-save'){
+
+        check_string($location,'location');
+        $file_name = ((strlen(trim($name))) > 0)?$name:basename($location);
+        $file = UPLOAD_PATH.$location;
+
+        header($_SERVER["SERVER_PROTOCOL"] . " 200 OK");
+        header("Cache-Control: public");
+        header("Content-Type: ".$type);
+        header("Content-Transfer-Encoding: Binary");
+        header("Content-Length:".filesize($file));
+        header("Content-Disposition: attachment; filename=".$file_name);
+        readfile($file);
+
+
+        die();
+    }
+
 
 
 //Array

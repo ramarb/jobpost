@@ -1,42 +1,21 @@
-<?php $this->load->view('desktop/'.$role.'/crud_nav')?>
+<ul class="nav nav-tabs">
+
+    <li role="presentation" class="active"><a href="#">Edit Profile</a></li>
+</ul>
+<br>
 
 <?php if($alert_type != 'Success'):?>
 	<div class="container">
 		<div class="col-md-10">
-		    <form class="form-horizontal" action="<?php echo base_url($role . '/'.$this->uri->segment(2).'/validate_edit/'.$id)?>" method="post">
-		        <div class="form-group">
-		            <input type="hidden" name="user_id" value="<?php echo $id?>" />
-		            <label for="" class="col-sm-2 control-label">Account Type</label>
-		            <div class="col-sm-6">
-		                <select class="form-control" name="role_name">
-		                    <option value="">Select One</option>
-		                    <?php if($roles->num_rows() !== null && $roles->num_rows() > 0):?>
-		                    	<?php foreach($roles->result() as $index => $value):?>
-		                    		<?php echo '<option value="'.$value->name.'">'.$value->name.'</option>'?>
-		                    	<?php endforeach;?>	
-		                    <?php endif;?>	
-		                </select>
-		            </div>
-		        </div>
-		        
-		        <div class="form-group">
-		            
-		            <label for="" class="col-sm-2 control-label">Status</label>
-		            <div class="col-sm-6">
-		                <select class="form-control" name="user_state">
-		                    <option value="">Select One</option>
-		                    <?php if($user_states->num_rows() !== null && $user_states->num_rows() > 0):?>
-		                    	<?php foreach($user_states->result() as $index => $value):?>
-		                    		<?php echo '<option value="'.$value->name.'">'.$value->name.'</option>'?>
-		                    	<?php endforeach;?>	
-		                    <?php endif;?>	
-		                </select>
-		            </div>
-		        </div>
+		    <form class="form-horizontal" action="<?php echo base_url($_role . '/'.$this->uri->segment(2).'/validate_update_account/'.$id)?>" method="post">
+
 		
 		        <div class="form-group">
 		            <label for="" class="col-sm-2 control-label">First Name</label>
 		            <div class="col-sm-6">
+                        <input type="hidden" name="user_id" value="<?php echo $id?>" />
+                        <input type="hidden" name="role_name" value="<?php echo $role_name?>" />
+                        <input type="hidden" name="user_state" value="<?php echo $user_state?>" />
 		                <input type="text" class="form-control" name="first_name" id="inputEmail3" value="<?php echo $first_name ?>" placeholder="">
 		            </div>
 		        </div>

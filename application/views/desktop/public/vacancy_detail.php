@@ -1,5 +1,5 @@
 <h2>Vacancies</h2>
-<?php echo $this->load->view('desktop/common/alert_message',array(),true)?>
+
 <style>
 	.my-grid div{
 		padding-top:7px;
@@ -57,3 +57,4 @@
   <div class="col-sm-4"><?php echo $vacancy->date_added ?>&nbsp;</div>
 </div>
 
+<?php echo $application_form?>

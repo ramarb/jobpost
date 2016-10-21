@@ -3,32 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Account extends MY_Controller_Moderator {
 
-
-    private $_alert_message = '';
-    private $_alert_type = '';
-
     public function __construct() {
         parent::__construct();
 		
 		$this->load->model('Users_model','users');
-		
-        if($this->session->flashdata('alert_type')){
-            $this->_alert_type = $this->session->flashdata('alert_type');
-        }
-
-        if($this->session->flashdata('alert_message')){
-            $this->_alert_message = $this->session->flashdata('alert_message');
-        }
 
     }
 
 	public function index(){
-		$data = array(
-			'alert_message' => $this->_alert_message, 
-			'alert_type' => $this->_alert_type,
-			'role' => $this->_role
-		);
-        $this->render($this->_role . '/home',$data);
+
+        $this->render($this->_role . '/home',$this->data);
 	}
 	
 	public function edit(){
@@ -86,12 +70,10 @@ class Account extends MY_Controller_Moderator {
     private function update(){
 		try{
 			$this->users->update($this->input->post());
-			$this->session->set_flashdata('alert_type','Success');
-            $this->session->set_flashdata('alert_message','Changes Saved...');
+            $this->set_alert_message('Success','Changes Saved',true);
 			redirect('registration');
 		}catch(Exception $e){
-			$this->_alert_type = "Error";
-            $this->_alert_message = $e->getMessage();
+            $this->set_alert_message('Error',$e->getMessage());
 		}
     }
 }

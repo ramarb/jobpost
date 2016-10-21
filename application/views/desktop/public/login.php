@@ -1,6 +1,6 @@
 <h1>Login</h1>
 
-<?php echo $this->load->view('desktop/common/alert_message',array(),true)?>
+
 
 <?php if($alert_type != 'Success'):?>
 		<div class="col-md-10">

@@ -1,6 +1,6 @@
 
 <?php $this->load->view('desktop/'.$role.'/crud_nav')?>
-<?php $this->load->view('desktop/common/alert_message')?>
+
 
 <?php
 

@@ -4,9 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Industries extends MY_Controller_Moderator {
 
 
-    private $_alert_message = '';
-    private $_alert_type = '';
-	private $_sort = 'name';
+    private $_sort = 'name';
 	private $order = 'ASC';
 
     public function __construct() {
@@ -15,15 +13,7 @@ class Industries extends MY_Controller_Moderator {
 		$this->load->model('industries_model','industries');
 		$this->load->model('Industries_model', 'industries');
 		$this->load->model('Miscellaneous_model','miscellaneous');
-		
-        if($this->session->flashdata('alert_type')){
-            $this->_alert_type = $this->session->flashdata('alert_type');
-        }
 
-        if($this->session->flashdata('alert_message')){
-            $this->_alert_message = $this->session->flashdata('alert_message');
-        }
-		
 		$sort = $this->session->userdata('industry_sort');
 		$order = $this->session->userdata('industry_order');;
 		
@@ -58,12 +48,9 @@ class Industries extends MY_Controller_Moderator {
 		
 		$data = array(
 			'industries' => $industries,
-			'alert_message' => $this->_alert_message, 
-			'alert_type' => $this->_alert_type,
 			'pagination' => $this->pagination->create_links(),
 			'order' => $this->order,
 			'sort' => $this->_sort,
-			'role' => $this->_role
 		);
 		$this->render($this->_role . '/industry_list', $data);
         
@@ -106,13 +93,8 @@ class Industries extends MY_Controller_Moderator {
 				$result[$key] = $_POST[$key];
 			}
 		}
-		
-		$data = array_merge(
-			$result,
-			array('alert_message' => $this->_alert_message, 'alert_type' => $this->_alert_type, 'role' => $this->_role)
-		);
-		
-		$this->render($this->_role . '/industry_edit', $data);
+
+		$this->render($this->_role . '/industry_edit', $result);
 	}
 	
 	public function validate_edit($industry_id){
@@ -142,8 +124,7 @@ class Industries extends MY_Controller_Moderator {
         $result = $this->form_validation->run();
 
         if($result == false){
-            $this->_alert_type = "Error";
-            $this->_alert_message = validation_errors();
+            $this->set_alert_message('Error',validation_errors());
         }else{
         	
 			switch ($type) {
@@ -194,12 +175,12 @@ class Industries extends MY_Controller_Moderator {
 					break;
 			}
 				
-			$this->session->set_flashdata('alert_type','Success');
-            $this->session->set_flashdata('alert_message',$alert_message);
+            $this->set_alert_message('Success',$alert_message,true);
+
 			redirect($this->_role . '/industries/mylist');
 		}catch(Exception $e){
-			$this->_alert_type = "Error";
-            $this->_alert_message = $e->getMessage();
+
+            $this->set_alert_message('Error',$e->getMessage());
 		}
 	}	
 

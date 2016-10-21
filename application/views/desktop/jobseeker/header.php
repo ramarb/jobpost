@@ -1,6 +1,7 @@
 <?php $this->load->view('desktop/common/top_header')?>
     <div class="row container-entry-form">
-		<?php
+
+        <?php
 		$default = '';
 		$public = array(
 			'vacancies' => '',
@@ -37,11 +38,9 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->userdata('login')->first_name ?><span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Edit Profile</a></li>
-                                <li><a href="<?php echo base_url(strtolower($role) . '/users/mylist')?>">Users</a></li>
-                                <li><a href="<?php echo base_url(strtolower($role) . '/industries/mylist')?>">Industries</a></li>
-                                <li><a href="<?php echo base_url(strtolower($role) . '/categories/mylist')?>">Categories</a></li>
-                                <li><a href="<?php echo base_url(strtolower($role) . '/vacancies/mylist')?>">Vacancies</a></li>
+                                <li><a href="<?php echo base_url('jobseeker/account/edit')?>">Edit Profile</a></li>
+                                <li><a href="<?php echo base_url('jobseeker/account/my_resume')?>">My Resume</a></li>
+                                <li><a href="#">My Work Experiences</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="<?php echo base_url('logout')?>">Logout</a></li>
                             </ul>

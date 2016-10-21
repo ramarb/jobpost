@@ -39,5 +39,43 @@ class Files_model extends CI_Model {
 
     }
 
+    /**
+     * @param $type
+     * @param $user_id
+     * @return array
+     */
+    public function read_files_by_type_owner($type, $user_id, $limit = ''){
+
+        check_int($user_id,'user_id');
+        check_string($type,'type');
+
+        $sql = "SELECT
+                    user_files.id AS user_files_id,
+                    user_file_types.name type,
+                    files.name file_name,
+                    files.date_added
+
+                FROM user_files
+                    INNER JOIN user_file_states ON user_file_states.id = user_files.user_file_states_id
+                    INNER JOIN user_file_types ON user_file_types.id = user_files.user_file_types_id
+                    INNER JOIN files ON files.id = user_files.files_id
+                    INNER JOIN users ON users.id = user_files.users_id
+                WHERE users.id = {$user_id} AND user_file_types.name = '{$type}'
+                ORDER BY files.date_added DESC
+                ".(((int)$limit > 0)?"LIMIT {$limit}":"")."
+                ;";
+
+        return $this->common($sql);
+    }
+
+    /**
+     * @param $files_id
+     */
+    public function read_file_by_id($files_id){
+        check_int($files_id);
+        $sql = "SELECT * FROM files WHERE id = {$files_id}";
+        return $this->common($sql);
+    }
+
 
 }

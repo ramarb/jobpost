@@ -4,9 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Vacancies extends MY_Controller_Employer {
 
 
-    private $_alert_message = '';
-    private $_alert_type = '';
-
     public function __construct() {
         parent::__construct();
 		
@@ -14,14 +11,6 @@ class Vacancies extends MY_Controller_Employer {
 		$this->load->model('Vacancies_model','vacancies');
 		$this->load->model('Miscellaneous_model','miscellaneous');
 		
-        if($this->session->flashdata('alert_type')){
-            $this->_alert_type = $this->session->flashdata('alert_type');
-        }
-
-        if($this->session->flashdata('alert_message')){
-            $this->_alert_message = $this->session->flashdata('alert_message');
-        }
-
     }
 
 	public function mylist(){
@@ -38,10 +27,9 @@ class Vacancies extends MY_Controller_Employer {
 		$this->pagination->initialize($config);
 		
 		$vacancies = $this->vacancies->read_by_owner($this->user->id,LIST_LIMIT,(int)$this->uri->segment(4));
+
 		$data = array(
 			'vacancies' => $vacancies,
-			'alert_message' => $this->_alert_message, 
-			'alert_type' => $this->_alert_type,
 			'pagination' => $this->pagination->create_links(),
 			'role' => $this->_role
 		);
@@ -51,7 +39,7 @@ class Vacancies extends MY_Controller_Employer {
 	
 	public function create(){
 		
-		$this->render($this->_role . '/vacancy_create',array('alert_message' => $this->_alert_message, 'alert_type' => $this->_alert_type, 'role' => $this->_role));
+		$this->render($this->_role . '/vacancy_create',$this->data);
 	}
 	
 	public function edit($vacancy_id){
@@ -63,10 +51,7 @@ class Vacancies extends MY_Controller_Employer {
 			}
 		}
 		
-		$data = array_merge(
-			$result,
-			array('alert_message' => $this->_alert_message, 'alert_type' => $this->_alert_type, 'role' => $this->_role)
-		);
+		$data = $result;
 		
 		$this->render($this->_role . '/vacancy_edit', $data);
 	}
@@ -129,8 +114,7 @@ class Vacancies extends MY_Controller_Employer {
         $result = $this->form_validation->run();
 
         if($result == false){
-            $this->_alert_type = "Error";
-            $this->_alert_message = validation_errors();
+            $this->set_alert_message('Error',validation_errors());
         }else{
         	
 			switch ($type) {
@@ -181,12 +165,11 @@ class Vacancies extends MY_Controller_Employer {
 					break;
 			}
 				
-			$this->session->set_flashdata('alert_type','Success');
-            $this->session->set_flashdata('alert_message',$alert_message);
+            $this->set_alert_message('Success',$alert_message,true);
+
 			redirect($this->_role . '/vacancies/mylist');
 		}catch(Exception $e){
-			$this->_alert_type = "Error";
-            $this->_alert_message = $e->getMessage();
+            $this->set_alert_message('Error',$e->getMessage());
 		}
 	}		
 

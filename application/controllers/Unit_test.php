@@ -14,10 +14,14 @@ class Unit_test extends MY_Controller{
     {
         parent::__construct();
 
-        $this->load->model('Users_model', 'user');
-        $this->load->model('Vacancies_model', 'vacancies');
+        $this->load->model('Users_model', 'users');
+        $this->load->model('Vacancies_model', 'vacancy');
         $this->load->model('Miscellaneous_model', 'miscellaneous');
         $this->load->model('Files_model','file');
+    }
+
+    public function index(){
+        echo '<h1>Unit Test Controller</h1>';
     }
 
     public function file_upload(){
@@ -27,11 +31,11 @@ class Unit_test extends MY_Controller{
         );
 
         if(isset($_FILES['file'])){
-            $this->load->library('file_management',$data,'file');
+            $this->load->library('file_management',$data,'file_u');
 
-            if(count($this->file->get_file_uploaded()) > 0){
-                $this->file->move();
-                p($this->file->get_result());
+            if(count($this->file_u->get_file_uploaded()) > 0){
+                $this->file_u->move();
+                p($this->file_u->get_result());
             }
         }
 
@@ -51,15 +55,16 @@ class Unit_test extends MY_Controller{
 
         try{
             $this->file->create_user_file($user_id, $location, $name, $size, $type, $file_type, $file_state);
+            echo 'OK';
         }catch (Exception $e){
             die($e->getMessage());
         }
     }
 
-    public function create_vacancy(){
+    public function create_vacancy_applicant(){
 
         try{
-            $this->user->create_vacancy_applicant_create(14,2);
+            $this->users->create_vacancy_applicant_create(3,1);
         }catch(Exception $e){
             die($e->getMessage());
         }
@@ -67,19 +72,19 @@ class Unit_test extends MY_Controller{
 
     public function create_work_experience(){
         //
-        $users_id = 3;
+        $users_id = 14;
         $position = uniqid('position_');
         $year_from = '2000';
         $month_from = 'July';
         $year_to = '2014';
         $month_to = 'September';
-        $is_present = 20000.50;
-        $monthly_salary = 'fasdf';
+        $is_present = 1;
+        $monthly_salary = 20000.50;
         $company = 'BTP';
         $description = 'Bridge Technology Partners';
 
         try{
-            $this->user->create_user_work_experience($users_id,$position,$year_from,$month_from,$year_to,$month_to,$is_present,$monthly_salary,$company,$description);
+            $this->users->create_user_work_experience($users_id,$position,$year_from,$month_from,$year_to,$month_to,$is_present,$monthly_salary,$company,$description);
             echo 'OK';
         }catch (Exception $e){
             echo $e->getMessage();
@@ -99,7 +104,7 @@ class Unit_test extends MY_Controller{
                         ,'description' => 'Furniture'
         );
         try{
-            $this->user->update_user_work_experience(1,$data);
+            $this->users->update_user_work_experience(1,$data);
             echo 'OK';
         }catch (Exception $e){
             die($e->getMessage());
@@ -109,12 +114,64 @@ class Unit_test extends MY_Controller{
 
     function delete_user_work_experience(){
         try{
-            $this->user->delete_user_work_experience(3);
+            $this->users->delete_user_work_experience(17);
             echo 'OK';
         }catch (Exception $e){
             die($e->getMessage());
         }
 
+    }
+
+    function read_applicants_by_employer(){
+        try{
+
+            p($this->vacancy->read_vacancy_applicant_by_employer(2)->result());
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    function read_files_by_type_owner(){
+        try{
+            p($this->file->read_files_by_type_owner('Company Logo',3)->result());
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+
+    }
+
+    public function read_file_by_id($files_id = 12){
+        try{
+           $result = $this->file->read_file_by_id($files_id);
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+
+        return $result->row();
+    }
+
+    public function download_file(){
+
+        $result = $this->read_file_by_id();
+
+        $this->load->library('file_management',array(),'file_u');
+
+        try{
+            $this->file_u->download($result->location, $result->name, $result->type);
+            die;
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+
+
+
+
+        //die(UPLOAD_PATH);
+        /*$file = UPLOAD_PATH.'14/files/58097b6ee7289.jpg';
+        header("Content-type: application/x-file-to-save");
+        header("Content-Disposition: attachment; filename=cry.jpg");
+        readfile($file);*/
     }
 
 

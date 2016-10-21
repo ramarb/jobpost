@@ -1,5 +1,5 @@
 <h2>Vacancies</h2>
-<?php echo $this->load->view('desktop/common/alert_message',array(),true)?>
+
 <style>
 	.my-grid div{
 		border-bottom:#CCCCCC solid 1px;

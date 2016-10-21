@@ -1,5 +1,5 @@
 <?php $this->load->view('desktop/'.$role.'/crud_nav')?>
-<?php echo $this->load->view('desktop/common/alert_message',array(),true)?>
+
 <?php if($alert_type != 'Success'):?>
 	<div class="container">
 		<div class="col-md-10">

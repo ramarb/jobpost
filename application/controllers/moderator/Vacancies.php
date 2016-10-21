@@ -3,9 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Vacancies extends MY_Controller_Moderator {
 
-
-    private $_alert_message = '';
-    private $_alert_type = '';
 	private $_sort = 'date_added';
 	private $order = 'DESC';
 
@@ -15,14 +12,6 @@ class Vacancies extends MY_Controller_Moderator {
 		$this->load->model('Users_model','users');
 		$this->load->model('Vacancies_model','vacancies');
 		$this->load->model('Miscellaneous_model','miscellaneous');
-		
-        if($this->session->flashdata('alert_type')){
-            $this->_alert_type = $this->session->flashdata('alert_type');
-        }
-
-        if($this->session->flashdata('alert_message')){
-            $this->_alert_message = $this->session->flashdata('alert_message');
-        }
 		
 		$sort = $this->session->userdata('vacancy_sort');
 		$order = $this->session->userdata('vacancy_order');;
@@ -61,12 +50,9 @@ class Vacancies extends MY_Controller_Moderator {
 		$vacancies = $this->vacancies->read_by_moderator(LIST_LIMIT,$offset,false,$this->_sort, $this->order);
 		$data = array(
 			'vacancies' => $vacancies,
-			'alert_message' => $this->_alert_message, 
-			'alert_type' => $this->_alert_type,
 			'pagination' => $this->pagination->create_links(),
 			'order' => $this->order,
 			'sort' => $this->_sort,
-			'role' => $this->_role
 		);
 		$this->render($this->_role . '/vacancy_list', $data);
         
@@ -103,12 +89,7 @@ class Vacancies extends MY_Controller_Moderator {
 			}
 		}
 		
-		$data = array_merge(
-			$result,
-			array('alert_message' => $this->_alert_message, 'alert_type' => $this->_alert_type, 'role' => $this->_role)
-		);
-		
-		$this->render($this->_role . '/vacancy_edit', $data);
+		$this->render($this->_role . '/vacancy_edit', $result);
 	}
 	
 	public function validate_edit($vacancy_id){
@@ -171,8 +152,7 @@ class Vacancies extends MY_Controller_Moderator {
         $result = $this->form_validation->run();
 
         if($result == false){
-            $this->_alert_type = "Error";
-            $this->_alert_message = validation_errors();
+            $this->set_alert_message('Error',validation_errors());
         }else{
         	
 			switch ($type) {
@@ -222,13 +202,11 @@ class Vacancies extends MY_Controller_Moderator {
 				default:
 					break;
 			}
-				
-			$this->session->set_flashdata('alert_type','Success');
-            $this->session->set_flashdata('alert_message',$alert_message);
+
+            $this->set_alert_message('Success',$alert_message,true);
 			redirect($this->_role . '/vacancies/mylist');
 		}catch(Exception $e){
-			$this->_alert_type = "Error";
-            $this->_alert_message = $e->getMessage();
+            $this->set_alert_message('Error',$e->getMessage());
 		}
 	}	
 

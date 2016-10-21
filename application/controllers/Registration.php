@@ -4,26 +4,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Registration extends MY_Controller {
 
 
-    private $_alert_message = '';
-    private $_alert_type = '';
 
     public function __construct() {
         parent::__construct();
 		
 		$this->load->model('Users_model','users');
 		
-        if($this->session->flashdata('alert_type')){
-            $this->_alert_type = $this->session->flashdata('alert_type');
-        }
 
-        if($this->session->flashdata('alert_message')){
-            $this->_alert_message = $this->session->flashdata('alert_message');
-        }
+
+
 
     }
 
 	public function index(){
-        $this->render('public/register',array('alert_message' => $this->_alert_message, 'alert_type' => $this->_alert_type));
+        $this->render('public/register',array());
 	}
 
     public function validate_registration(){
@@ -67,8 +61,7 @@ class Registration extends MY_Controller {
         $result = $this->form_validation->run();
 
         if($result == false){
-            $this->_alert_type = "Error";
-            $this->_alert_message = validation_errors();
+            $this->set_alert_message('Error',validation_errors());
         }else{
             $this->create_user();
         }
@@ -80,12 +73,10 @@ class Registration extends MY_Controller {
 		try{
 			$data = array_merge(array('user_state'=>'Pending Activation'), $this->input->post());
 			$this->users->create($data);
-			$this->session->set_flashdata('alert_type','Success');
-            $this->session->set_flashdata('alert_message','Registration Successful, You may now login...');
+            $this->set_alert_message('Success','Registration Successful, You may now login...',true);
 			redirect('registration');
 		}catch(Exception $e){
-			$this->_alert_type = "Error";
-            $this->_alert_message = $e->getMessage();
+            $this->set_alert_message('Error',$e->getMessage());
 		}
     }
 }

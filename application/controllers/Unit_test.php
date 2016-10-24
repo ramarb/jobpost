@@ -151,7 +151,7 @@ class Unit_test extends MY_Controller{
         return $result->row();
     }
 
-    public function download_file(){
+    public function test_download_file(){
 
         $result = $this->read_file_by_id();
 
@@ -163,15 +163,15 @@ class Unit_test extends MY_Controller{
         }catch(Exception $e){
             die($e->getMessage());
         }
+    }
 
-
-
-
-        //die(UPLOAD_PATH);
-        /*$file = UPLOAD_PATH.'14/files/58097b6ee7289.jpg';
-        header("Content-type: application/x-file-to-save");
-        header("Content-Disposition: attachment; filename=cry.jpg");
-        readfile($file);*/
+    public function update_vacancy_applicant_status(){
+        try{
+            $this->vacancy->update_vacancy_applicant_status(3,'in progress');
+            echo "Ok";
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
     }
 
 

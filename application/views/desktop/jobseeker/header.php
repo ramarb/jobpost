@@ -40,7 +40,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="<?php echo base_url('jobseeker/account/edit')?>">Edit Profile</a></li>
                                 <li><a href="<?php echo base_url('jobseeker/account/my_resume')?>">My Resume</a></li>
-                                <li><a href="#">My Work Experiences</a></li>
+                                <li><a href="<?php echo base_url('jobseeker/experiences')?>">Work Experiences</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="<?php echo base_url('logout')?>">Logout</a></li>
                             </ul>

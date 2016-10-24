@@ -10,6 +10,8 @@ class Vacancies extends MY_Controller_Employer {
 		$this->load->model('Users_model','users');
 		$this->load->model('Vacancies_model','vacancies');
 		$this->load->model('Miscellaneous_model','miscellaneous');
+
+
 		
     }
 
@@ -55,8 +57,6 @@ class Vacancies extends MY_Controller_Employer {
 		
 		$this->render($this->_role . '/vacancy_edit', $data);
 	}
-	
-	
 	
 	public function validate_edit($vacancy_id){
 		$this->validate('update', $vacancy_id);
@@ -171,6 +171,33 @@ class Vacancies extends MY_Controller_Employer {
 		}catch(Exception $e){
             $this->set_alert_message('Error',$e->getMessage());
 		}
-	}		
+	}
+
+    public function applicants(){
+        try{
+            $this->js_header = javascript(array('angular.min'));
+            $this->js_footer = javascript(array('vacancy_employer'));
+            $result = $this->vacancies->read_vacancy_applicant_by_employer($this->user->id);
+            $this->render($this->_role . '/applicants',array('applicants'=>$result));
+        }catch(Exception $e){
+            $this->set_alert_message('Error',$e->getMessage(),true);
+            redirect($this->_role.'/account');
+        }
+    }
+
+    public function download_resume($vacancy_applicant_id){
+
+        try{
+            $result = $this->vacancies->read_vacancy_applicant_by_employer($this->user->id, $vacancy_applicant_id)->row();
+            $this->vacancies->update_vacancy_applicant_status($vacancy_applicant_id, 'in progress');
+            $this->download_file($result->resume_id);
+
+        }catch (Exception $e){
+            $this->set_alert_message('Error',$e->getMessage(),true);
+            redirect($this->_role . '/vacancies/applicants');
+        }
+
+        //$this->download_file($files_id);
+    }
 
 }

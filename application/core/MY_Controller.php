@@ -118,6 +118,21 @@ class MY_Controller extends CI_Controller {
             $this->_alert_message = $message;
         }
     }
+
+    public function download_file($files_id){
+        $this->load->model('Files_model','files');
+        $this->load->library('file_management',array(),'file_u');
+        try{
+            if((int)$this->user->id < 1){
+                throw new UnexpectedValueException('You need to login In order to download file',400);
+            }
+            $file = $this->files->read_file_by_id($files_id)->row();
+            $this->file_u->download($file->location, $file->name, $file->type);
+        }catch(Exception $e){
+            $this->set_alert_message('Error',$e->getMessage(),true);
+            redirect($this->_role.'/account');
+        }
+    }
 }
 
 class MY_Controller_Employer extends MY_Controller {

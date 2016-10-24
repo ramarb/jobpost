@@ -92,7 +92,23 @@ class Miscellaneous_model extends CI_Model {
     	";
 		return $this->common($sql);
     }
-	
 
+
+    /**
+     * @param $id
+     * @param $field
+     * @param $value
+     * @param $table
+     * @return array
+     */
+    public function update_field($id,$field,$value,$table){
+        check_int($id,'id');
+        check_string($field,'field');
+        check_string($value,'value');
+        check_string($table,'table');
+
+        $sql = "UPDATE `{$table}` SET `{$field}` = " . $this->db->escape($value) . " WHERE id = " . $this->db->escape($id) . ";";
+        return $this->common($sql);
+    }
 	
 }

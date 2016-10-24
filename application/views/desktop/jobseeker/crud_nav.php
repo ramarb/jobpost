@@ -1,6 +1,6 @@
 <?php
 $h1 = array(
-	'vacancies' => 'Vacancies',
+	'experiences' => 'Experiences',
 	'users' => 'Users'
 );
 ?>

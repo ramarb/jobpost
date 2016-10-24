@@ -318,10 +318,12 @@ class Vacancies_model extends CI_Model {
      * @param $users_id
      * @return array
      */
-    public function read_vacancy_applicant_by_employer($users_id){
+    public function read_vacancy_applicant_by_employer($users_id, $id = ''){
         check_int($users_id);
         $sql = "SELECT
+                    vacancy_applicants.id,
                     vacancy_applicants.vacancies_id,
+                    vacancy_applicant_states.name AS vacancy_applicant_state,
                     vacancies.title,
                     applicant_profile.first_name,
                     applicant_profile.last_name,
@@ -336,13 +338,35 @@ class Vacancies_model extends CI_Model {
 
                 FROM vacancy_applicants
                 INNER JOIN vacancies ON vacancies.id = vacancy_applicants.vacancies_id
+                INNER JOIN vacancy_applicant_states on vacancy_applicant_states.id = vacancy_applicants.vacancy_applicant_states_id
                 INNER JOIN users AS applicant ON applicant.id = vacancy_applicants.users_id
                 INNER JOIN user_profiles AS applicant_profile ON applicant_profile.users_id = applicant.id
                 LEFT JOIN user_work_experieces ON user_work_experieces.users_id = applicant.id AND user_work_experieces.is_present = 1
-                INNER JOIN users AS vacancy_owner ON vacancy_owner.id = vacancies.users_id";
+                INNER JOIN users AS vacancy_owner ON vacancy_owner.id = vacancies.users_id
+                WHERE vacancy_owner.id = {$users_id}
+                " . (((int)$id > 0)?"   AND vacancy_applicants.id = {$id}":"") . "
+                ";
 
         return $this->common($sql);
 
+    }
+
+    /**
+     * @param $id
+     * @param $status
+     * @return array
+     */
+    public function update_vacancy_applicant_status($id, $status){
+        check_int($id,'id');
+        check_string($status,'status');
+        $sql = "UPDATE vacancy_applicants
+            SET vacancy_applicant_states_id = (
+                SELECT id FROM vacancy_applicant_states WHERE name = ".$this->db->escape($status)."
+            )
+            WHERE id = {$id};
+        ";
+
+        return $this->common($sql);
     }
 
 }

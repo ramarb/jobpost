@@ -276,7 +276,6 @@ class Users_model extends CI_Model {
         ";
 
         return $this->common($sql);
-
     }
 
     /**
@@ -286,6 +285,16 @@ class Users_model extends CI_Model {
     public function  delete_user_work_experience($id){
         check_int($id,'id');
         return $this->common("DELETE FROM user_work_experieces WHERE id = " . $this->db->escape($id) . " LIMIT 1;");
+    }
+
+    /**
+     * @param $users_id
+     * @return array
+     */
+    public function read_user_work_experience($users_id){
+        check_int($users_id,'user_id');
+        $sql = " SELECT * FROM user_work_experieces where users_id = {$users_id};";
+        return $this->common($sql);
     }
 
 }

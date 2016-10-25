@@ -19,6 +19,7 @@ class MY_Controller extends CI_Controller {
     public $data = array();
     public $role_name = '';
     public $_role = '';
+    public $controller = '';
 	
 	/**
 	 * __construct()
@@ -43,12 +44,15 @@ class MY_Controller extends CI_Controller {
             $this->_alert_message = $this->session->flashdata('alert_message');
         }
 
+        $this->data['controller'] = $this->controller;
+
 	}
 
 	public function render($body, $data){
 		
 		$this->data['javascripts_header'] = $this->js_header;
         $this->data['javascripts_footer'] = $this->js_footer;
+
         $this->data = array_merge($data, $this->data,$this->get_alert_message());
 
         $this->switch_header($this->role_name,$this->data);
@@ -60,6 +64,7 @@ class MY_Controller extends CI_Controller {
     public function render_logged_in($body, $data=array()){
         $data['javascripts_header'] = $this->js_header;
         $data['javascripts_footer'] = $this->js_footer;
+
 
         $data = array_merge($this->get_alert_message(),$data,$this->data);
 

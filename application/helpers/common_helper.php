@@ -45,3 +45,9 @@ function check_array($param, $param_name = 'param_name'){
 		throw new InvalidArgumentException($param_name.' must be a none empty array',500);
 	}
 }
+
+function set_form_json_data($array){
+    return '<script type="application/javascript">
+    var form_data = ' . json_encode($array) . ';
+</script>';
+}

@@ -221,7 +221,7 @@ class Users_model extends CI_Model {
         foreach($fields as $index => $value){
             if($value === 'users_id'){
                 check_int($$value, $value);
-            }else{
+            }elseif(in_array($value,array('users_id','position','year_from','month_from','company')) === true){
                 check_string($$value, $value);
             }
         }
@@ -245,24 +245,33 @@ class Users_model extends CI_Model {
     }
 
     /**
-     * @param $id
+     * @param $users_id
      * @param $data
      * @return array
      */
-    public function update_user_work_experience($id,$data){
-
+    public function update_user_work_experience($users_id,$data){
+        $id = $data['id'];
         check_int($id,'id');
+        check_int($users_id,'users_id');
 
         foreach($data as $index => $value){
             if($value === 'users_id'){
                 check_int($value, $index);
-            }else{
+            }elseif(in_array($index,array('users_id','position','year_from','month_from','company')) === true){
                 check_string($value, $index);
             }
         }
+
+        $data['monthly_salary'] = '';
+        $data['is_present'] = 0;
+        if($data['month_to'] === 'Present'){
+            $data['is_present'] = 1;
+            $data['year_to'] = '';
+            $data['month_to'] = '';
+        }
+
         $sql = "UPDATE user_work_experieces
             SET
-                users_id = ".$this->db->escape($data['users_id']).",
                 position = ".$this->db->escape($data['position']).",
                 year_from = ".$this->db->escape($data['year_from']).",
                 month_from = ".$this->db->escape($data['month_from']).",
@@ -272,7 +281,7 @@ class Users_model extends CI_Model {
                 monthly_salary = ".$this->db->escape($data['monthly_salary']).",
                 company = ".$this->db->escape($data['company']).",
                 description = ".$this->db->escape($data['description'])."
-            WHERE id = ".$this->db->escape($id)."
+            WHERE id = {$id} AND users_id = {$users_id}
         ";
 
         return $this->common($sql);
@@ -294,6 +303,18 @@ class Users_model extends CI_Model {
     public function read_user_work_experience($users_id){
         check_int($users_id,'user_id');
         $sql = " SELECT * FROM user_work_experieces where users_id = {$users_id};";
+        return $this->common($sql);
+    }
+
+    /**
+     * @param $users_id
+     * @param $id
+     * @return array
+     */
+    public function read_user_work_experience_by_id($users_id, $id){
+        check_int($users_id,'user_id');
+        check_int($id,'id');
+        $sql = " SELECT * FROM user_work_experieces where users_id = {$users_id} AND id = {$id};";
         return $this->common($sql);
     }
 

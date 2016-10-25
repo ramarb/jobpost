@@ -1,5 +1,6 @@
 <?php $this->load->view('desktop/'.$role.'/crud_nav')?>
-<form action="<?php echo base_url($_role.'/'.$controller.'/validate_create')?>" method="post">
+<form action="<?php echo base_url($_role.'/'.$controller.'/validate_edit/'.$id)?>" method="post">
+    <input type="text" style="display: none" ng-model="id" name="id">
     <div class="form-group">
         <label for="email">Position:</label>
         <input type="text" class="form-control" id="" ng-model="position" name="position">

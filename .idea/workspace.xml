@@ -28,17 +28,37 @@
       <file leaf-file-name="Users_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/Users_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-30.583334" vertical-offset="3661" max-vertical-offset="4575">
-              <caret line="293" column="45" selection-start-line="293" selection-start-column="20" selection-end-line="293" selection-end-column="45" />
+            <state vertical-scroll-proportion="-9.25" vertical-offset="3644" max-vertical-offset="4890">
+              <caret line="275" column="70" selection-start-line="275" selection-start-column="70" selection-end-line="275" selection-end-column="70" />
               <folding>
-                <marker date="1477279384147" expanded="true" signature="1404:1917" placeholder="SELECT users..users..." />
-                <marker date="1477279384147" expanded="true" signature="2743:3041" placeholder="SELECT ${{$s..." />
-                <marker date="1477279384147" expanded="true" signature="3333:3807" placeholder="SELECT users..users..." />
-                <marker date="1477279384147" expanded="true" signature="5825:6505" placeholder="INSERT INTO ..." />
-                <marker date="1477279384147" expanded="true" signature="6950:7730" placeholder="UPDATE user_..." />
-                <marker date="1477279384147" expanded="true" signature="7981:8063" placeholder="DELETE FROM ..." />
-                <marker date="1477279384147" expanded="true" signature="8251:8303" placeholder="SELECT * FRO..user_work_experieces..." />
-                <marker date="1477279384147" expanded="true" signature="8251:8314" placeholder="SELECT * FRO..user_work_experieces..." />
+                <marker date="1477366211984" expanded="true" signature="1404:1917" placeholder="SELECT users..users..." />
+                <marker date="1477366211984" expanded="true" signature="2743:3041" placeholder="SELECT ${{$s..." />
+                <marker date="1477366211984" expanded="true" signature="3333:3807" placeholder="SELECT users..users..." />
+                <marker date="1477366211984" expanded="true" signature="5918:6598" placeholder="INSERT INTO ..." />
+                <marker date="1477366211984" expanded="true" signature="7451:8162" placeholder="UPDATE user_..." />
+                <marker date="1477366211984" expanded="true" signature="7451:8166" placeholder="UPDATE user_..." />
+                <marker date="1477366211984" expanded="true" signature="7451:8183" placeholder="UPDATE user_..." />
+                <marker date="1477366211984" expanded="true" signature="7451:8185" placeholder="UPDATE user_..." />
+                <marker date="1477366211984" expanded="true" signature="7451:8194" placeholder="UPDATE user_..." />
+                <marker date="1477366211984" expanded="true" signature="8419:8501" placeholder="DELETE FROM ..." />
+                <marker date="1477366211984" expanded="true" signature="8689:8741" placeholder="SELECT * FRO..user_work_experieces..." />
+                <marker date="1477366211984" expanded="true" signature="8689:8752" placeholder="SELECT * FRO..user_work_experieces..." />
+                <marker date="1477366211984" expanded="true" signature="9033:9074" placeholder="SELECT * FRO..user_work_experieces..." />
+                <marker date="1477366211984" expanded="true" signature="9033:9106" placeholder="SELECT * FRO..user_work_experieces..." />
+                <marker date="1477366211984" expanded="true" signature="9033:9111" placeholder="SELECT * FRO..user_work_experieces..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="work_experience_edit.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/desktop/jobseeker/work_experience_edit.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="6.9166665" vertical-offset="181" max-vertical-offset="1095">
+              <caret line="1" column="78" selection-start-line="1" selection-start-column="78" selection-end-line="1" selection-end-column="78" />
+              <folding>
+                <element signature="e#177#198#0#HTML" expanded="true" />
+                <element signature="e#867#888#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -47,8 +67,8 @@
       <file leaf-file-name="Experiences.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/jobseeker/Experiences.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-22.5" vertical-offset="0" max-vertical-offset="690">
-              <caret line="36" column="61" selection-start-line="36" selection-start-column="61" selection-end-line="36" selection-end-column="61" />
+            <state vertical-scroll-proportion="-2.9038463" vertical-offset="629" max-vertical-offset="3135">
+              <caret line="52" column="57" selection-start-line="52" selection-start-column="57" selection-end-line="52" selection-end-column="57" />
               <folding>
                 <element signature="e#6#88#0#PHP" expanded="true" />
               </folding>
@@ -56,11 +76,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="work_experiences.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="common_helper.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/helpers/common_helper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="870">
+              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+              <folding>
+                <marker date="1477364133090" expanded="true" signature="1414:1435" placeholder="..." />
+                <marker date="1477364133090" expanded="true" signature="1414:1436" placeholder="..." />
+                <marker date="1477364133090" expanded="true" signature="1414:1473" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MY_Controller.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/core/MY_Controller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.519231" vertical-offset="315" max-vertical-offset="3690">
+              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="work_experiences.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/work_experiences.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.15991472" vertical-offset="0" max-vertical-offset="938">
+              <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -76,52 +120,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user_edit.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/desktop/moderator/user_edit.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1350">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Account.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/jobseeker/Account.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="11.25" vertical-offset="585" max-vertical-offset="2535">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="crud_nav.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/desktop/jobseeker/crud_nav.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="495">
-              <caret line="23" column="132" selection-start-line="23" selection-start-column="132" selection-end-line="23" selection-end-column="132" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="header.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/desktop/jobseeker/header.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-26.25" vertical-offset="0" max-vertical-offset="855">
-              <caret line="42" column="93" selection-start-line="42" selection-start-column="93" selection-end-line="42" selection-end-column="93" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="work_experience_create.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="work_experience_create.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/desktop/jobseeker/work_experience_create.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8698031" vertical-offset="135" max-vertical-offset="1095">
-              <caret line="62" column="18" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
-              <folding />
+            <state vertical-scroll-proportion="-3.0833333" vertical-offset="166" max-vertical-offset="1080">
+              <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+              <folding>
+                <element signature="e#794#815#0#HTML" expanded="true" />
+                <element signature="e#1948#1969#0#HTML" expanded="true" />
+                <element signature="e#2887#2942#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -129,7 +137,7 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../angularjs/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.673077" vertical-offset="380" max-vertical-offset="2415">
+            <state vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="2415">
               <caret line="45" column="25" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="25" />
               <folding />
             </state>
@@ -141,7 +149,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/views/desktop/jobseeker/home.php" />
         <option value="$PROJECT_DIR$/application/views/desktop/moderator/category_create.php" />
         <option value="$PROJECT_DIR$/application/views/desktop/moderator/category_edit.php" />
         <option value="$PROJECT_DIR$/application/views/desktop/moderator/industry_create.php" />
@@ -178,20 +185,21 @@
         <option value="$PROJECT_DIR$/application/views/desktop/employer/appicants.php" />
         <option value="$PROJECT_DIR$/assets/js/vacancy_employer.js" />
         <option value="$PROJECT_DIR$/application/models/Miscellaneous_model.php" />
-        <option value="$PROJECT_DIR$/application/helpers/common_helper.php" />
         <option value="$PROJECT_DIR$/application/models/Vacancies_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/Unit_test.php" />
         <option value="$PROJECT_DIR$/application/controllers/employer/Vacancies.php" />
         <option value="$PROJECT_DIR$/application/views/desktop/employer/header.php" />
         <option value="$PROJECT_DIR$/application/views/desktop/employer/applicants.php" />
-        <option value="$PROJECT_DIR$/application/core/MY_Controller.php" />
-        <option value="$PROJECT_DIR$/application/models/Users_model.php" />
         <option value="$PROJECT_DIR$/application/views/desktop/jobseeker/header.php" />
         <option value="$PROJECT_DIR$/application/views/desktop/jobseeker/crud_nav.php" />
         <option value="$PROJECT_DIR$/application/views/desktop/jobseeker/work_experience_list.php" />
+        <option value="$PROJECT_DIR$/application/core/MY_Controller.php" />
+        <option value="$PROJECT_DIR$/application/helpers/common_helper.php" />
+        <option value="$PROJECT_DIR$/application/views/desktop/jobseeker/work_experience_create.php" />
+        <option value="$PROJECT_DIR$/application/views/desktop/jobseeker/work_experience_edit.php" />
+        <option value="$PROJECT_DIR$/application/models/Users_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/jobseeker/Experiences.php" />
         <option value="$PROJECT_DIR$/assets/js/work_experiences.js" />
-        <option value="$PROJECT_DIR$/application/views/desktop/jobseeker/work_experience_create.php" />
       </list>
     </option>
   </component>
@@ -641,10 +649,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="43" y="24" width="1877" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16784741" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16948229" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -706,13 +714,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/js/public_vacancy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="870">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/desktop/jobseeker/resume.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.7777777" vertical-offset="0" max-vertical-offset="630">
@@ -874,19 +875,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/moderator/Users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="3540">
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/libraries/File_management.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4584245" vertical-offset="1981" max-vertical-offset="2895">
           <caret line="160" column="0" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -894,7 +886,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-25.291666" vertical-offset="593" max-vertical-offset="2355">
           <caret line="80" column="63" selection-start-line="79" selection-start-column="8" selection-end-line="80" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -902,7 +893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.25" vertical-offset="45" max-vertical-offset="1575">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -910,10 +900,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-31.833334" vertical-offset="376" max-vertical-offset="1290">
           <caret line="76" column="15" selection-start-line="76" selection-start-column="15" selection-end-line="76" selection-end-column="15" />
-          <folding>
-            <marker date="1477030862621" expanded="true" signature="-1:-1" placeholder="SELECT user_..user_files..." />
-            <marker date="1477030862621" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..files..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -921,7 +907,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.047974415" vertical-offset="0" max-vertical-offset="938">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="7" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -929,7 +914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.625" vertical-offset="0" max-vertical-offset="630">
           <caret line="25" column="65" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -937,16 +921,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-26.833334" vertical-offset="871" max-vertical-offset="1785">
           <caret line="101" column="20" selection-start-line="101" selection-start-column="20" selection-end-line="101" selection-end-column="20" />
-          <folding>
-            <marker date="1477276275734" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1477276275734" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..user_states..." />
-            <marker date="1477276275734" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..roles..." />
-            <marker date="1477276275734" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..vacancy_states..." />
-            <marker date="1477276275734" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..job_industries..." />
-            <marker date="1477276275734" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..provinces..." />
-            <marker date="1477276275734" expanded="true" signature="-1:-1" placeholder="SELECT provi..cities..." />
-            <marker date="1477276275734" expanded="true" signature="-1:-1" placeholder="SELECT job_i..job_categories..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -954,7 +928,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-26.25" vertical-offset="0" max-vertical-offset="855">
           <caret line="42" column="112" selection-start-line="42" selection-start-column="112" selection-end-line="42" selection-end-column="112" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -962,7 +935,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="720">
           <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -970,41 +942,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7210066" vertical-offset="4711" max-vertical-offset="5655">
           <caret line="358" column="51" selection-start-line="358" selection-start-column="20" selection-end-line="358" selection-end-column="51" />
-          <folding>
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT job_i..job_categories..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="UPDATE vacan..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT vacan..vacancies..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT vacan..vacancies..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT ${{$s..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT ${{$s..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT ${{$s..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT vacan..vacancy_applicants..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT vacan..vacancy_applicants..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT vacan..vacancy_applicants..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT files..files..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="UPDATE vacan..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="UPDATE vacan..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="UPDATE vacan..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="UPDATE vacan..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="UPDATE vacan..." />
-            <marker date="1477277321539" expanded="true" signature="-1:-1" placeholder="SELECT id FR..vacancy_applicant_states..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/helpers/common_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="780">
-          <caret line="24" column="64" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/core/MY_Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.1666665" vertical-offset="1331" max-vertical-offset="3615">
-          <caret line="97" column="26" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,9 +949,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-28.083334" vertical-offset="1831" max-vertical-offset="2745">
           <caret line="167" column="51" selection-start-line="167" selection-start-column="20" selection-end-line="167" selection-end-column="51" />
-          <folding>
-            <element signature="e#6#88#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1022,13 +956,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.5" vertical-offset="270" max-vertical-offset="1350">
           <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/desktop/jobseeker/header.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-26.25" vertical-offset="0" max-vertical-offset="855">
+        <state vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="855">
           <caret line="42" column="93" selection-start-line="42" selection-start-column="93" selection-end-line="42" selection-end-column="93" />
           <folding />
         </state>
@@ -1036,7 +969,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/desktop/jobseeker/crud_nav.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="495">
+        <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="495">
           <caret line="23" column="132" selection-start-line="23" selection-start-column="132" selection-end-line="23" selection-end-column="132" />
           <folding />
         </state>
@@ -1054,7 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.49124727" vertical-offset="2206" max-vertical-offset="3120">
           <caret line="177" column="12" selection-start-line="177" selection-start-column="12" selection-end-line="178" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1062,8 +994,49 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../angularjs/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="380" max-vertical-offset="2415">
+          <caret line="45" column="25" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/moderator/Users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-82.5" vertical-offset="1440" max-vertical-offset="3540">
+          <caret line="228" column="8" selection-start-line="82" selection-start-column="4" selection-end-line="228" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/core/MY_Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.519231" vertical-offset="315" max-vertical-offset="3690">
+          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/jobseeker/Account.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.29540482" vertical-offset="585" max-vertical-offset="2535">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/helpers/common_helper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="870">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
           <folding>
-            <element signature="e#0#40#0" expanded="false" />
+            <marker date="1477364133090" expanded="true" signature="1414:1435" placeholder="..." />
+            <marker date="1477364133090" expanded="true" signature="1414:1436" placeholder="..." />
+            <marker date="1477364133090" expanded="true" signature="1414:1473" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1076,43 +1049,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Users_model.php">
+    <entry file="file://$PROJECT_DIR$/application/views/desktop/jobseeker/work_experience_create.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-30.583334" vertical-offset="3661" max-vertical-offset="4575">
-          <caret line="293" column="45" selection-start-line="293" selection-start-column="20" selection-end-line="293" selection-end-column="45" />
+        <state vertical-scroll-proportion="-3.0833333" vertical-offset="166" max-vertical-offset="1080">
+          <caret line="16" column="48" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
           <folding>
-            <marker date="1477279384147" expanded="true" signature="1404:1917" placeholder="SELECT users..users..." />
-            <marker date="1477279384147" expanded="true" signature="2743:3041" placeholder="SELECT ${{$s..." />
-            <marker date="1477279384147" expanded="true" signature="3333:3807" placeholder="SELECT users..users..." />
-            <marker date="1477279384147" expanded="true" signature="5825:6505" placeholder="INSERT INTO ..." />
-            <marker date="1477279384147" expanded="true" signature="6950:7730" placeholder="UPDATE user_..." />
-            <marker date="1477279384147" expanded="true" signature="7981:8063" placeholder="DELETE FROM ..." />
-            <marker date="1477279384147" expanded="true" signature="8251:8303" placeholder="SELECT * FRO..user_work_experieces..." />
-            <marker date="1477279384147" expanded="true" signature="8251:8314" placeholder="SELECT * FRO..user_work_experieces..." />
+            <element signature="e#794#815#0#HTML" expanded="true" />
+            <element signature="e#1948#1969#0#HTML" expanded="true" />
+            <element signature="e#2887#2942#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../angularjs/index.html">
+    <entry file="file://$PROJECT_DIR$/application/views/desktop/jobseeker/work_experience_edit.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.673077" vertical-offset="380" max-vertical-offset="2415">
-          <caret line="45" column="25" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="25" />
-          <folding />
+        <state vertical-scroll-proportion="6.9166665" vertical-offset="181" max-vertical-offset="1095">
+          <caret line="1" column="78" selection-start-line="1" selection-start-column="78" selection-end-line="1" selection-end-column="78" />
+          <folding>
+            <element signature="e#177#198#0#HTML" expanded="true" />
+            <element signature="e#867#888#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/jobseeker/Account.php">
+    <entry file="file://$PROJECT_DIR$/application/models/Users_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="11.25" vertical-offset="585" max-vertical-offset="2535">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="-9.25" vertical-offset="3644" max-vertical-offset="4890">
+          <caret line="275" column="70" selection-start-line="275" selection-start-column="70" selection-end-line="275" selection-end-column="70" />
+          <folding>
+            <marker date="1477366211984" expanded="true" signature="1404:1917" placeholder="SELECT users..users..." />
+            <marker date="1477366211984" expanded="true" signature="2743:3041" placeholder="SELECT ${{$s..." />
+            <marker date="1477366211984" expanded="true" signature="3333:3807" placeholder="SELECT users..users..." />
+            <marker date="1477366211984" expanded="true" signature="5918:6598" placeholder="INSERT INTO ..." />
+            <marker date="1477366211984" expanded="true" signature="7451:8162" placeholder="UPDATE user_..." />
+            <marker date="1477366211984" expanded="true" signature="7451:8166" placeholder="UPDATE user_..." />
+            <marker date="1477366211984" expanded="true" signature="7451:8183" placeholder="UPDATE user_..." />
+            <marker date="1477366211984" expanded="true" signature="7451:8185" placeholder="UPDATE user_..." />
+            <marker date="1477366211984" expanded="true" signature="7451:8194" placeholder="UPDATE user_..." />
+            <marker date="1477366211984" expanded="true" signature="8419:8501" placeholder="DELETE FROM ..." />
+            <marker date="1477366211984" expanded="true" signature="8689:8741" placeholder="SELECT * FRO..user_work_experieces..." />
+            <marker date="1477366211984" expanded="true" signature="8689:8752" placeholder="SELECT * FRO..user_work_experieces..." />
+            <marker date="1477366211984" expanded="true" signature="9033:9074" placeholder="SELECT * FRO..user_work_experieces..." />
+            <marker date="1477366211984" expanded="true" signature="9033:9106" placeholder="SELECT * FRO..user_work_experieces..." />
+            <marker date="1477366211984" expanded="true" signature="9033:9111" placeholder="SELECT * FRO..user_work_experieces..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/jobseeker/Experiences.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.5" vertical-offset="0" max-vertical-offset="690">
-          <caret line="36" column="61" selection-start-line="36" selection-start-column="61" selection-end-line="36" selection-end-column="61" />
+        <state vertical-scroll-proportion="-2.9038463" vertical-offset="629" max-vertical-offset="3135">
+          <caret line="52" column="57" selection-start-line="52" selection-start-column="57" selection-end-line="52" selection-end-column="57" />
           <folding>
             <element signature="e#6#88#0#PHP" expanded="true" />
           </folding>
@@ -1121,16 +1108,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/work_experiences.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/desktop/jobseeker/work_experience_create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8698031" vertical-offset="135" max-vertical-offset="1095">
-          <caret line="62" column="18" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.15991472" vertical-offset="0" max-vertical-offset="938">
+          <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
           <folding />
         </state>
       </provider>

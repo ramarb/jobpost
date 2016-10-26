@@ -4,10 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Account extends MY_Controller_Job_Seeker {
 
     public function __construct() {
+        $this->controller = 'account';
         parent::__construct();
 		
 		$this->load->model('Users_model','users');
         $this->load->model('Files_model','file');
+        $this->load->model('Vacancies_model','vacancies');
 
     }
 
@@ -160,4 +162,24 @@ class Account extends MY_Controller_Job_Seeker {
         }
 
     }
+
+    public function download_resume($id){
+        $this->download_file($id);
+    }
+
+    public function job_applications(){
+        try{
+            $job_applications = $this->vacancies->read_vacancies_by_applicant($this->user->id);
+        }catch(Exception $e){
+            $this->set_alert_message('Error',$e->getMessage());
+        }
+
+        //p($job_applications->result(),1);
+        $this->js_footer = javascript(array('jobseeker_applications'));
+        $this->js_header = javascript(array('angular.min'));
+        $this->js_variables['job_applications'] = array('json'=>$job_applications->result());
+        $this->render($this->_role.'/applications',array('job_applications'=>$job_applications));
+
+    }
+
 }

@@ -226,15 +226,20 @@ class Users_model extends CI_Model {
             }
         }
 
+        $date_from = date('Y-m-d',strtotime($year_from . ' ' . $month_from));
+        $date_to = date('Y-m-d',strtotime($year_to . ' ' . $month_to));
 
-        $sql = "INSERT INTO user_work_experieces(users_id,position,year_from,month_from,year_to,month_to,is_present,monthly_salary,company,description)
+        if((int)$is_present === 1){
+            $date_to = '';
+        }
+
+
+        $sql = "INSERT INTO user_work_experieces(users_id,position,date_from,".((strlen($date_to) > 0)?"date_to,":"")."is_present,monthly_salary,company,description)
             VALUES(
                 ".$this->db->escape($users_id).",
                 ".$this->db->escape($position).",
-                ".$this->db->escape($year_from).",
-                ".$this->db->escape($month_from).",
-                ".$this->db->escape($year_to).",
-                ".$this->db->escape($month_to).",
+                ".$this->db->escape($date_from).",
+                ".((strlen($date_to) > 0)?"".$this->db->escape($date_to).",":"")."
                 ".$this->db->escape($is_present).",
                 ".$this->db->escape($monthly_salary).",
                 ".$this->db->escape($company).",
@@ -262,21 +267,23 @@ class Users_model extends CI_Model {
             }
         }
 
+        $date_from = date('Y-m-d',strtotime($data['year_from'] . ' ' . $data['month_from']));
+        $date_to = date('Y-m-d',strtotime($data['year_to'] . ' ' . $data['month_to']));
+
         $data['monthly_salary'] = '';
         $data['is_present'] = 0;
+
         if($data['month_to'] === 'Present'){
             $data['is_present'] = 1;
-            $data['year_to'] = '';
-            $data['month_to'] = '';
+            $date_to = '';
         }
+
 
         $sql = "UPDATE user_work_experieces
             SET
                 position = ".$this->db->escape($data['position']).",
-                year_from = ".$this->db->escape($data['year_from']).",
-                month_from = ".$this->db->escape($data['month_from']).",
-                year_to = ".$this->db->escape($data['year_to']).",
-                month_to = ".$this->db->escape($data['month_to']).",
+                date_from = ".$this->db->escape($date_from).",
+                ".((strlen($date_to) > 0)?"date_to = ".$this->db->escape($date_to).",":"")."
                 is_present = ".$this->db->escape($data['is_present']).",
                 monthly_salary = ".$this->db->escape($data['monthly_salary']).",
                 company = ".$this->db->escape($data['company']).",
@@ -291,9 +298,10 @@ class Users_model extends CI_Model {
      * @param $id
      * @return array
      */
-    public function  delete_user_work_experience($id){
+    public function  delete_user_work_experience_by_owner($users_id, $id){
         check_int($id,'id');
-        return $this->common("DELETE FROM user_work_experieces WHERE id = " . $this->db->escape($id) . " LIMIT 1;");
+        check_int($users_id);
+        return $this->common("DELETE FROM user_work_experieces WHERE id = " . $this->db->escape($id) . " AND users_id = {$users_id} LIMIT 1;");
     }
 
     /**
@@ -302,7 +310,15 @@ class Users_model extends CI_Model {
      */
     public function read_user_work_experience($users_id){
         check_int($users_id,'user_id');
-        $sql = " SELECT * FROM user_work_experieces where users_id = {$users_id};";
+        $sql = " SELECT
+              *,
+               DATE_FORMAT(date_from,'%M') AS month_from,
+               DATE_FORMAT(date_from,'%Y') AS year_from,
+               DATE_FORMAT(date_to,'%M') AS month_to,
+               DATE_FORMAT(date_to,'%Y') AS year_to
+          FROM user_work_experieces
+          WHERE users_id = {$users_id}
+          ORDER BY is_primary ASC, is_present ASC, date_from DESC;";
         return $this->common($sql);
     }
 
@@ -314,8 +330,37 @@ class Users_model extends CI_Model {
     public function read_user_work_experience_by_id($users_id, $id){
         check_int($users_id,'user_id');
         check_int($id,'id');
-        $sql = " SELECT * FROM user_work_experieces where users_id = {$users_id} AND id = {$id};";
+        $sql = " SELECT
+            *,
+               DATE_FORMAT(date_from,'%M') AS month_from,
+               DATE_FORMAT(date_from,'%Y') AS year_from,
+               DATE_FORMAT(date_to,'%M') AS month_to,
+               DATE_FORMAT(date_to,'%Y') AS year_to
+        FROM user_work_experieces
+        WHERE users_id = {$users_id} AND id = {$id}
+        ORDER BY is_primary ASC, is_present ASC, date_from DESC;";
+
         return $this->common($sql);
+    }
+
+    /**
+     * @param $users_id
+     * @param $user_work_experiences_id
+     */
+    public function set_primary_work_experience($users_id, $user_work_experiences_id){
+        check_int($users_id);
+        check_int($user_work_experiences_id);
+
+        $sql = "CALL sp_set_primary_work_experience(
+            ".$this->db->escape($users_id).",
+            ".$this->db->escape($user_work_experiences_id).",
+            @message
+        );";
+
+        $this->common($sql);
+
+        $this->check_sp_result();
+
     }
 
 }

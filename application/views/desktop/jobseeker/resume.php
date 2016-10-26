@@ -1,23 +1,22 @@
+
 <h1>Resume</h1>
-<ul class="list-group">
-
-    <li ng-repeat="resume in resumes"  class="list-group-item">
-
-        <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Action <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Download</a></li>
-                <li><a href="#">Edit</a></li>
-            </ul>
-        </div>
-        {{resume.file_name}}
-
-    </li>
-</ul>
 
 
+<?php if($resumes->result_id->num_rows > 0):?>
+    <?php $resume = $resumes->row()?>
+
+    <ul class="list-group">
+
+        <li ng-repeat="resume in resumes"  class="list-group-item">
+
+            <div class="btn-group">
+                <a href="<?php echo user_anchor('download_resume/'.$resume->files_id,$_role,$controller)?>" class="btn btn-primary">{{resume.file_name}} <span class="glyphicon glyphicon-download"></span></a>
+            </div>
+
+        </li>
+    </ul>
+
+<?php endif;?>
 
 
 <form class="navbar-form navbar-left" role="search" enctype="multipart/form-data" method="post" action="<?php echo base_url($role.'/account/upload_resume')?>" >

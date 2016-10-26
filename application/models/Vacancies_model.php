@@ -369,4 +369,32 @@ class Vacancies_model extends CI_Model {
         return $this->common($sql);
     }
 
+    /**
+     * @param $users_id
+     * @return array
+     */
+    public function read_vacancies_by_applicant($users_id){
+        check_int($users_id);
+
+        $sql = "SELECT
+                    vacancies.id vacancies_id,
+                    vacancies.address,
+                    vacancies.company,
+                    vacancies.title,
+                    job_categories.name category,
+                    job_industries.name industry,
+                    vacancy_applicant_states.name application_status
+
+                FROM vacancy_applicants
+                INNER JOIN users ON users.id = vacancy_applicants.users_id
+                INNER JOIN vacancy_applicant_states ON vacancy_applicant_states.id = vacancy_applicants.vacancy_applicant_states_id
+                INNER JOIN vacancies ON vacancies.id = vacancy_applicants.vacancies_id
+                INNER JOIN job_categories ON job_categories.id = vacancies.job_categories_id
+                INNER JOIN job_industries ON job_industries.id = job_categories.job_industries_id
+                WHERE users.id = {$users_id}
+        ";
+
+        return $this->common($sql);
+    }
+
 }

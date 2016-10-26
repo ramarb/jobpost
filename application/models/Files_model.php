@@ -53,7 +53,8 @@ class Files_model extends CI_Model {
                     user_files.id AS user_files_id,
                     user_file_types.name type,
                     files.name file_name,
-                    files.date_added
+                    files.date_added,
+                    files.id files_id
 
                 FROM user_files
                     INNER JOIN user_file_states ON user_file_states.id = user_files.user_file_states_id

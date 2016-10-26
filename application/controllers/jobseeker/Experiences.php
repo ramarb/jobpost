@@ -32,13 +32,15 @@ class Experiences extends MY_Controller_Job_Seeker {
     }
 
     public function index(){
+
         $this->mylist();
     }
 
 
     public function mylist(){
         $work_experiences = $this->users->read_user_work_experience($this->user->id);
-
+        $this->js_header = javascript(array('angular.min'));
+        $this->js_footer = javascript(array('work_experiences'));
         $this->render($this->_role.'/work_experience_list',array('work_experiences' => $work_experiences, 'crud_nav' => $this->crud_nav));
     }
 
@@ -115,6 +117,11 @@ class Experiences extends MY_Controller_Job_Seeker {
             array(
                 'field'   => 'month_from',
                 'label'   => 'Month From',
+                'rules'   => 'required'
+            ),
+            array(
+                'field'   => 'year_from',
+                'label'   => 'Year From',
                 'rules'   => 'required'
             )
         );
@@ -199,6 +206,33 @@ class Experiences extends MY_Controller_Job_Seeker {
             $this->set_alert_message('Error',$e->getMessage());
 
         }
+    }
+
+    public function delete($id){
+        try{
+            $this->users->delete_user_work_experience_by_owner($this->user->id, $id);
+            $this->set_alert_message('Success','Work Experience successfully deleted',true);
+            redirect($this->_role.'/'.$this->controller.'/');
+        }catch(Exception $e){
+            $this->set_alert_message('Error',$e->getMessage());
+            $this->mylist();
+        }
+
+    }
+
+    /**
+     * @param $id
+     */
+    public function set_primary($id){
+        $out = array('message'=>'Error');
+        try{
+            $this->users->set_primary_work_experience($this->user->id,$id);
+            $out = array('message'=>'Success');
+        }catch (Exception $e){
+            $this->set_alert_message('Error',$e->getMessage(),true);
+        }
+
+        echo json_encode($out);
     }
 
 }

@@ -16,10 +16,14 @@ class MY_Controller extends CI_Controller {
 	public $user = '';
     public $js_header = '';
     public $js_footer = '';
+    public $js_common = '';
+    public $js_variables = array();
+    public $js_variables_render = '';
     public $data = array();
     public $role_name = '';
     public $_role = '';
     public $controller = '';
+    public $user_view = '';
 	
 	/**
 	 * __construct()
@@ -45,13 +49,22 @@ class MY_Controller extends CI_Controller {
         }
 
         $this->data['controller'] = $this->controller;
+        $this->js_common = javascript(array('helper'));
+        $this->js_variables = array(
+            'base_url'      => base_url(),
+            'controller'    => $this->controller,
+        );
+
 
 	}
 
 	public function render($body, $data){
-		
+        $this->js_variables['role'] = $this->_role;
+        $this->js_variables['base_uri'] = base_url($this->_role.'/'.$this->controller);
+
+        $this->js_variables_render = javascript_variable($this->js_variables);
 		$this->data['javascripts_header'] = $this->js_header;
-        $this->data['javascripts_footer'] = $this->js_footer;
+        $this->data['javascripts_footer'] = $this->js_variables_render.$this->js_footer.$this->js_common;
 
         $this->data = array_merge($data, $this->data,$this->get_alert_message());
 
@@ -62,8 +75,12 @@ class MY_Controller extends CI_Controller {
     }
 
     public function render_logged_in($body, $data=array()){
+        $this->js_variables['role'] = $this->_role;
+        $this->js_variables['base_uri'] = base_url($this->_role.'/'.$this->controller);
+
+        $this->js_variables_render = javascript_variable($this->js_variables);
         $data['javascripts_header'] = $this->js_header;
-        $data['javascripts_footer'] = $this->js_footer;
+        $data['javascripts_footer'] = $this->js_variables_render.$this->js_footer.$this->js_common;
 
 
         $data = array_merge($this->get_alert_message(),$data,$this->data);

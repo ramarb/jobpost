@@ -22,6 +22,23 @@ function javascript($javascripts){
 	return $ret;
 }
 
+function javascript_variable($array){
+    $return = '<script type="application/javascript">'."\n";
+
+
+    foreach($array as $index => $value){
+        if(is_array($value) === true && isset($value['json'])){
+            $return .= "var {$index} = ".json_encode($value['json']).";"."\n";
+        }else{
+            $return .= "var {$index} = '{$value}';"."\n";
+        }
+    }
+
+    $return .= '</script>'."\n";
+
+    return $return;
+}
+
 function check_int_allow_null($param, $param_name = 'param_name'){
 	if($param !== '' && (int)$param < 1){
 		throw new InvalidArgumentException($param_name.' must be int greater than zero or null',500);
@@ -50,4 +67,14 @@ function set_form_json_data($array){
     return '<script type="application/javascript">
     var form_data = ' . json_encode($array) . ';
 </script>';
+}
+
+/**
+ * @param $uri
+ * @param $role
+ * @param $controller
+ * @return string
+ */
+function user_anchor($uri,$role,$controller){
+    return base_url($role.'/'.$controller.'/'.$uri);
 }

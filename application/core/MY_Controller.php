@@ -155,6 +155,54 @@ class MY_Controller extends CI_Controller {
             redirect($this->_role.'/account');
         }
     }
+
+    public function upload_file($user_file_type, $file_index){
+
+        $return = true;
+
+
+        $data = array(
+            'index' => $file_index,
+            'move_to' => $this->user->id . '/files/'
+        );
+        //
+        if(isset($_FILES[$file_index])){
+
+            $this->load->library('file_management',$data,'file_upload');
+
+            if(count($this->file_upload->get_file_uploaded()) > 0){
+                $this->file_upload->move();
+                $result = $this->file_upload->get_result();
+
+                if((int)$result['error'] > 0){
+                    $error_message = '';
+                    foreach($result['error_message'] as $message){
+                        $error_message .= $message.'<br />';
+                    }
+                    $this->set_alert_message('Error',$error_message);
+                    $return = false;
+                }else{
+
+                    $data = $result['data'];
+
+                    try{
+
+                        $this->file->create_user_file($this->user->id, $data['location'], $data['name'], $data['size'], $data['type'], $user_file_type, 'Active');
+                        $this->set_alert_message('Success','Changes Saved',true);
+
+                    }catch (Exception $e){
+                        $this->set_alert_message('Error',$e->getMessage());
+                        $return = false;
+                    }
+                }
+            }else{
+                $this->set_alert_message('Error','Uploading error set 1');
+            }
+        }
+
+        return $return;
+    }
+
 }
 
 class MY_Controller_Employer extends MY_Controller {

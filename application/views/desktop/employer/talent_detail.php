@@ -5,10 +5,19 @@
         </a>
     </div>
 </div>
+<div class="row">
+    <div class="col-lg-1">
+        <a href="#" class="btn btn-primary">Send Message <span class="glyphicon glyphicon-envelope"></span></a>
+    </div>
+
+</div>
 <h2 ng-bind="full_name"></h2>
 <p>
     <span ng-bind="talent.age"></span> years old
+
 </p>
+
+
 
 <h3>Achievements</h3>
 

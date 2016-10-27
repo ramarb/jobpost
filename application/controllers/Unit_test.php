@@ -174,5 +174,14 @@ class Unit_test extends MY_Controller{
         }
     }
 
+    public function read_job_seekers(){
+        try{
+            $result = $this->users->read_job_seekers();
+            p($result->result());
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+
+    }
 
 }

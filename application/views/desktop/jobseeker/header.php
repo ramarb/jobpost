@@ -43,6 +43,8 @@
                                 <li><a href="<?php echo base_url('jobseeker/experiences')?>">Work Experiences</a></li>
                                 <li><a href="<?php echo base_url('jobseeker/account/job_applications')?>">Job Applications</a></li>
                                 <li role="separator" class="divider"></li>
+                                <li><a href="<?php echo base_url('jobseeker/account/')?>">Dashboard</a></li>
+                                <li role="separator" class="divider"></li>
                                 <li><a href="<?php echo base_url('logout')?>">Logout</a></li>
                             </ul>
                         </li>

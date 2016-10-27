@@ -96,14 +96,16 @@ class Users extends MY_Controller_Moderator {
 					
 			}
 		}
-		
+
+        $result['user_role_name'] = $result['role_name'];
+
 		$data = array_merge(
 			$result,
 			array('roles'=>$this->miscellaneous->read_roles(),
 			'user_states'=>$this->miscellaneous->read_user_states()),
 			$password
 		);
-		
+
 		$this->render($this->_role . '/user_edit', $data);
 	}
 	

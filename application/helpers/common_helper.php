@@ -78,3 +78,7 @@ function set_form_json_data($array){
 function user_anchor($uri,$role,$controller){
     return base_url($role.'/'.$controller.'/'.$uri);
 }
+
+function img_src($location){
+    return base_url(UPLOAD_URL.$location);
+}

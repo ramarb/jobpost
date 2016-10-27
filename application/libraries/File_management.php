@@ -16,7 +16,7 @@ class File_management {
     private $file_extension = '';
     private $error = 0;
     private $error_messages = array();
-    private $allowed_file_size = 100000;
+    private $allowed_file_size = 10000000;
     private $result = array();
     private $success = 0;
     private $real_file_name = '';
@@ -76,7 +76,10 @@ class File_management {
     }
 
     private function is_allowed_file_size(){
-        return ((double)$this->allowed_file_size < (double)$this->file_uploaded['size']);
+        $allowed_file_size = (int)$this->allowed_file_size;
+        $uploaded_file_size = (int)$this->file_uploaded['size'];
+        return ($allowed_file_size > $uploaded_file_size);
+        //return true;
     }
 
     private function is_allowed_file_type($name = ''){

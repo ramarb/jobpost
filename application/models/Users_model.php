@@ -41,7 +41,9 @@ class Users_model extends CI_Model {
 			" . $this->db->escape($data['last_name']) . ",
 			" . $this->db->escape($data['email']) . ",
 			" . $this->db->escape($data['password']) . ",
-			" . $this->db->escape($data['user_state']) . ",	
+			" . $this->db->escape($data['user_state']) . ",
+            " . $this->db->escape(date('Y-m-d',strtotime($data['birth_date']))) . ",
+            " . $this->db->escape($data['achievements']) . ",
 			@message,
         	@return_id
         )";
@@ -58,19 +60,39 @@ class Users_model extends CI_Model {
 	public function read_row($user_id){
 		$sql = "
 			SELECT 
-				users.*,
+				users.id,
+				users.username,
 				users.username email,
+                '' AS password,
 				0 repeat_password,
 				user_profiles.first_name,
 				user_profiles.last_name,
 				roles.name role,
 				roles.name role_name,
-				user_states.name user_state 
+				roles.id AS roles_id,
+				user_states.name user_state,
+				user_profiles.birth_date,
+				FLOOR(DATEDIFF (NOW(), user_profiles.birth_date)/365) AS age,
+				user_profiles.achievements,
+				user_work_experieces.position,
+                user_work_experieces.company,
+				(
+				    SELECT
+				      files.location
+				    FROM user_files
+				    INNER JOIN user_file_types ON user_file_types.id = user_files.user_file_types_id
+				    INNER JOIN files ON files.id = user_files.files_id
+				    WHERE user_files.users_id = {$user_id}
+				      AND user_file_types.name = '".USER_FILE_TYPE_PROFILE_PHOTO."'
+				      ORDER BY files.date_added DESC
+				      LIMIT 1
+				) AS profile_picture
 			FROM users
 			INNER JOIN user_profiles on users.id = user_profiles.users_id
 			INNER JOIN user_roles on users.id = user_roles.users_id
 			INNER JOIN roles on roles.id = user_roles.roles_id 
 			INNER JOIN user_states on user_states.id = users.user_states_id
+			LEFT JOIN user_work_experieces on user_work_experieces.users_id = users.id AND user_work_experieces.is_primary = 1
 			WHERE users.id = " . $user_id . " LIMIT 1";
 		
 		$result = $this->common($sql);
@@ -84,6 +106,49 @@ class Users_model extends CI_Model {
 		return $return;
 		
 	}
+
+    public function read_job_seekers(){
+        $sql = "
+			SELECT
+				users.id,
+				users.username,
+				users.username email,
+                '' AS password,
+				0 repeat_password,
+				user_profiles.first_name,
+				user_profiles.last_name,
+				roles.name role,
+				roles.name role_name,
+				user_states.name user_state,
+				user_profiles.birth_date,
+				FLOOR(DATEDIFF (NOW(), user_profiles.birth_date)/365) AS age,
+				user_profiles.achievements,
+				user_work_experieces.position,
+                user_work_experieces.company,
+				(
+				    SELECT
+				      files.location
+				    FROM user_files
+				    INNER JOIN user_file_types ON user_file_types.id = user_files.user_file_types_id
+				    INNER JOIN files ON files.id = user_files.files_id
+				    WHERE user_files.users_id = users.id
+				      AND user_file_types.name = '".USER_FILE_TYPE_PROFILE_PHOTO."'
+				      ORDER BY files.date_added DESC
+				      LIMIT 1
+				) AS profile_picture
+
+			FROM users
+			INNER JOIN user_profiles on users.id = user_profiles.users_id
+			INNER JOIN user_roles on users.id = user_roles.users_id
+			INNER JOIN roles on roles.id = user_roles.roles_id
+			INNER JOIN user_states on user_states.id = users.user_states_id
+			LEFT JOIN user_work_experieces on user_work_experieces.users_id = users.id AND user_work_experieces.is_primary = 1
+
+			WHERE roles.name = 'Job Seeker'
+			";
+
+        return $this->common($sql);
+    }
 
     /**
      * @param int $limit
@@ -202,20 +267,7 @@ class Users_model extends CI_Model {
      * @return array
      */
     public function create_user_work_experience($users_id,$position,$year_from,$month_from,$year_to,$month_to,$is_present,$monthly_salary,$company,$description){
-        /**
-         * id	int(11)	NO	PRI		auto_increment
-        users_id	int(11)	NO	MUL
-        position	varchar(250)	YES
-        year_from	varchar(5)	YES
-        month_from	varchar(45)	YES
-        year_to	varchar(5)	YES
-        month_to	varchar(45)	YES
-        is_present	int(11)	YES
-        monthly_salary	float	YES
-        company	varchar(250)	YES
-        description	int(11)	YES
 
-         */
         $fields = array('users_id','position','year_from','month_from','year_to','month_to','is_present','monthly_salary','company','description');
 
         foreach($fields as $index => $value){

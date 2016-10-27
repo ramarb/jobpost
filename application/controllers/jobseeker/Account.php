@@ -15,13 +15,29 @@ class Account extends MY_Controller_Job_Seeker {
 
 	public function index(){
 
-        $this->render($this->_role . '/home',$this->data);
+        try{
+            $job_seeker = $this->users->read_row($this->user->id);
+            $experiences = $this->users->read_user_work_experience($this->user->id);
+            $this->js_variables['job_seeker'] = array('json'=>$job_seeker);
+            $this->js_variables['experiences'] = 0;
+
+            if($experiences->result_id->num_rows > 0){
+                $this->js_variables['experiences'] = array('json'=>$experiences->result());
+            }
+
+            $this->js_footer = javascript(array('employer/talents'));
+            $this->js_header = javascript(array('angular.min'));
+        }catch (Exception $e){
+            $this->set_alert_message('Error',$e->getMessage());
+        }
+
+        $this->render($this->_role.'/home',array());
 	}
 	
 	public function edit(){
 
         $result = $this->users->read_row($this->user->id);
-
+        //p($result,1);
         $password = array(
             'password'=>'',
             'repeat_password'=>''
@@ -98,23 +114,21 @@ class Account extends MY_Controller_Job_Seeker {
     }
 	
     private function update(){
-		try{
-			$this->users->update($this->input->post());
-			$this->session->set_flashdata('alert_type','Success');
-            $this->session->set_flashdata('alert_message','Changes Saved...');
-
-            $this->set_alert_message('Success','Changes Saved...',true);
-
-			redirect($this->_role.'/account/edit');
-		}catch(Exception $e){
-            $this->set_alert_message('Error',$e->getMessage());
-		}
+        if($this->upload_file(USER_FILE_TYPE_PROFILE_PHOTO,'profile_picture')){
+            try{
+                $this->users->update($this->input->post());
+                $this->set_alert_message('Success','Changes Saved...',true);
+                redirect($this->_role.'/account/edit');
+            }catch(Exception $e){
+                $this->set_alert_message('Error',$e->getMessage());
+            }
+        }
     }
 
     public function my_resume(){
 
         $this->js_header = javascript(array('angular.min','constants'));
-        $this->js_footer = javascript(array('job_seeker'));
+        $this->js_footer = javascript(array($this->_role.'/job_seeker'));
 
         $this->data['resumes'] = $this->file->read_files_by_type_owner('Resume',$this->user->id,1);
 
@@ -122,45 +136,12 @@ class Account extends MY_Controller_Job_Seeker {
     }
 
     public function upload_resume(){
-        $data = array(
-            'index' => 'file',
-            'move_to' => $this->user->id . '/files/'
-        );
 
-        if(isset($_FILES['file'])){
-
-            $this->load->library('file_management',$data,'file_upload');
-
-            if(count($this->file_upload->get_file_uploaded()) > 0){
-                $this->file_upload->move();
-                $result = $this->file_upload->get_result();
-
-                if((int)$result['error'] > 0){
-                    $error_message = '';
-                    foreach($result['error_message'] as $message){
-                        $error_message .= $message.'<br />';
-                    }
-
-                    $this->set_alert_message('Error',$error_message);
-                }else{
-
-                    $data = $result['data'];
-                    try{
-
-                        $this->file->create_user_file($this->user->id, $data['location'], $data['name'], $data['size'], $data['type'], USER_FILE_TYPE_RESUME, 'Active');
-
-                        $this->set_alert_message('Success','Changes Saved',true);
-
-                        redirect($this->_role.'/account/my_resume');
-                    }catch (Exception $e){
-                        $this->set_alert_message('Error',$e->getMessage());
-                    }
-                }
-
-                $this->my_resume();
-            }
+        if($this->upload_file(USER_FILE_TYPE_RESUME,'file')){
+            redirect($this->_role.'/account/my_resume');
+        }else{
+            $this->my_resume();
         }
-
     }
 
     public function download_resume($id){
@@ -174,8 +155,7 @@ class Account extends MY_Controller_Job_Seeker {
             $this->set_alert_message('Error',$e->getMessage());
         }
 
-        //p($job_applications->result(),1);
-        $this->js_footer = javascript(array('jobseeker_applications'));
+        $this->js_footer = javascript(array($this->_role.'/applications'));
         $this->js_header = javascript(array('angular.min'));
         $this->js_variables['job_applications'] = array('json'=>$job_applications->result());
         $this->render($this->_role.'/applications',array('job_applications'=>$job_applications));

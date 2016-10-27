@@ -43,6 +43,8 @@
                                 <li><a href="<?php echo base_url(strtolower($role) . '/categories/mylist')?>">Categories</a></li>
                                 <li><a href="<?php echo base_url(strtolower($role) . '/vacancies/mylist')?>">Vacancies</a></li>
                                 <li role="separator" class="divider"></li>
+                                <li><a href="<?php echo base_url(strtolower($role) . '/account')?>">Dashboard</a></li>
+                                <li role="separator" class="divider"></li>
                                 <li><a href="<?php echo base_url('logout')?>">Logout</a></li>
                             </ul>
                         </li>

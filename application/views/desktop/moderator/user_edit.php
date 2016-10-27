@@ -8,11 +8,13 @@
 		            <input type="hidden" name="user_id" value="<?php echo $id?>" />
 		            <label for="" class="col-sm-2 control-label">Account Type</label>
 		            <div class="col-sm-6">
+                        <?php $selected_role[$user_role_name] = 'selected="selected"'?>
+                        <?php //p($roles->result())?>
 		                <select class="form-control" name="role_name">
 		                    <option value="">Select One</option>
 		                    <?php if($roles->num_rows() !== null && $roles->num_rows() > 0):?>
 		                    	<?php foreach($roles->result() as $index => $value):?>
-		                    		<?php echo '<option value="'.$value->name.'">'.$value->name.'</option>'?>
+		                    		<?php echo '<option ' . ((isset($selected_role[$value->name]) === true)?$selected_role[$value->name]:"") . ' value="'.$value->name.'">'.$value->name.'</option>'?>
 		                    	<?php endforeach;?>	
 		                    <?php endif;?>	
 		                </select>
@@ -75,10 +77,10 @@
 	</div>
 	
 	<script type="text/javascript">
-	var role = '<?php echo $role_name ?>';
+	var user_role = '<?php echo $role_name ?>';
 	var user_state = '<?php echo $user_state ?>';
 	$(window).load(function(){
-		$('select[name="role_name"]').val(role);
+
 		$('select[name="user_state"]').val(user_state);
 	});	
 	</script>

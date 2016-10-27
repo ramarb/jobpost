@@ -59,7 +59,7 @@
 
     <div class="form-group">
         <label for="email">Position:</label>
-        <textarea style="width: 100%; height: 220px; border-radius: 3px;" ng-model="description" name="description"></textarea>
+        <textarea style="" ng-model="description" name="description"></textarea>
     </div>
 
     <button type="submit" class="btn btn-default">Submit</button>

@@ -23,6 +23,7 @@
 		            
 		            <label for="" class="col-sm-2 control-label">Status</label>
 		            <div class="col-sm-6">
+
 		                <select class="form-control" name="user_state">
 		                    <option value="">Select One</option>
 		                    <?php if($user_states->num_rows() !== null && $user_states->num_rows() > 0):?>
@@ -75,10 +76,11 @@
 	</div>
 	
 	<script type="text/javascript">
-	var role = '<?php echo set_value('role') ?>';
+	var user_role = '<?php echo set_value('role_name') ?>';
 	var user_state = '<?php echo set_value('user_state') ?>';
 	$(window).load(function(){
-		$('select[name="role_name"]').val(role);
+
+		$('select[name="role_name"]').val(user_role);
 		$('select[name="user_state"]').val(user_state);
 	});	
 	</script>

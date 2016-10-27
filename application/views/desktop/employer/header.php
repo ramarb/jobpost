@@ -41,6 +41,9 @@
                                 <li><a href="<?php echo base_url($_role . '/account/edit')?>">Edit Profile</a></li>
                                 <li><a href="<?php echo base_url($_role . '/vacancies/mylist')?>">My Vacancies</a></li>
                                 <li><a href="<?php echo base_url($_role . '/vacancies/applicants')?>">Applicants</a></li>
+                                <li><a href="<?php echo base_url($_role . '/talents')?>">Find Talents</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="<?php echo base_url($_role . '/account')?>">Dashboard</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="<?php echo base_url('logout')?>">Logout</a></li>
                             </ul>

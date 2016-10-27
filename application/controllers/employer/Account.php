@@ -8,6 +8,7 @@ class Account extends MY_Controller_Employer {
         parent::__construct();
 
         $this->load->model('Users_model','users');
+        $this->load->model('Files_model','file');
 
     }
 
@@ -96,14 +97,18 @@ class Account extends MY_Controller_Employer {
     }
 
     private function update(){
-        try{
-            $this->users->update($this->input->post());
+        if($this->upload_file(USER_FILE_TYPE_PROFILE_PHOTO,'profile_picture')){
+            try{
+                $this->users->update($this->input->post());
 
-            $this->set_alert_message('Success','Changes Saved...',true);
+                $this->set_alert_message('Success','Changes Saved...',true);
 
-            redirect($this->_role.'/account/edit');
-        }catch(Exception $e){
-            $this->set_alert_message('Error',$e->getMessage());
+                redirect($this->_role.'/account/edit');
+            }catch(Exception $e){
+                $this->set_alert_message('Error',$e->getMessage());
+            }
         }
     }
+
+
 }

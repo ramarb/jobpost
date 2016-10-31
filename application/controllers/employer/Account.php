@@ -110,5 +110,13 @@ class Account extends MY_Controller_Employer {
         }
     }
 
+    public function test(){
+        $this->js_header = javascript(array_merge(array('angular.min'),$this->ng_materials()));
+        $this->js_footer = javascript(array('test'));
+        $this->main_ng_switch = 'Off';
+        $this->css_header = css(array('angular-material.min'));
+        $this->render('public/test',array());
+    }
+
 
 }

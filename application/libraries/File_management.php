@@ -99,10 +99,12 @@ class File_management {
 
         $array = explode("/",$this->path);
         $concat = '';
+        $start_checking = false;
         foreach($array as $index => $value){
             if(strlen(trim($value)) > 0){
                 $concat .= '/' . $value;
-                if(file_exists($concat) === false){
+
+                if($start_checking && file_exists($concat) === false){
                     mkdir($concat);
                 }
             }

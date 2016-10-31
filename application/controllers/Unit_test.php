@@ -181,6 +181,33 @@ class Unit_test extends MY_Controller{
         }catch(Exception $e){
             die($e->getMessage());
         }
+    }
+
+    public function create_company(){
+        /**
+         * ".$this->db->escape($users_id).",
+        ".$this->db->escape($data['name']).",
+        ".$this->db->escape($data['description']).",
+        ".$this->db->escape($data['job_categories_id']).",
+        ".$this->db->escape($data['cities_id']).",
+        ".$this->db->escape($data['address']).",
+        ".$this->db->escape($data['contact_number'])."
+         */
+        $data = array(
+            'name' => 'PhotoUp',
+            'description' => 'editing Production',
+            'job_categories_id' => 3,
+            'cities_id' => 100,
+            'address' => 'Talisay City',
+            'contact_number' => '505-5555'
+        );
+
+        try{
+            $this->users->create_company(3,$data);
+            echo 'OK';
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
 
     }
 

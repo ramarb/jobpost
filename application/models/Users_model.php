@@ -224,7 +224,7 @@ class Users_model extends CI_Model {
 		
 		$result = $result->row();
 		
-		if($result->password === md5($data['password'])){
+		if(isset($result->password) == true && $result->password === md5($data['password'])){
 			$this->session->set_userdata('login',$result);
 			$return = true;
 		}else{
@@ -413,6 +413,30 @@ class Users_model extends CI_Model {
 
         $this->check_sp_result();
 
+    }
+
+    /**
+     * @param $users_id
+     * @param $data
+     * @return array
+     */
+    public function create_company($users_id, $data){
+
+        check_int($users_id,'user_id');
+
+        $sql = "CALL sp_company_create(
+                    ".$this->db->escape($users_id).",
+                    ".$this->db->escape($data['name']).",
+                    ".$this->db->escape($data['description']).",
+                    ".$this->db->escape($data['job_categories_id']).",
+                    ".$this->db->escape($data['cities_id']).",
+                    ".$this->db->escape($data['address']).",
+                    ".$this->db->escape($data['contact_number']).",
+                    @message,
+                    @return_id
+                );";
+        $this->common($sql);
+        $this->check_sp_result();
     }
 
 }

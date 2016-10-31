@@ -14,6 +14,7 @@ class MY_Controller extends CI_Controller {
 	public $_unit = 'desktop';
 	
 	public $user = '';
+    public $css_header = '';
     public $js_header = '';
     public $js_footer = '';
     public $js_common = '';
@@ -24,6 +25,9 @@ class MY_Controller extends CI_Controller {
     public $_role = '';
     public $controller = '';
     public $user_view = '';
+
+    public $jquery_switch = 'On';
+    public $main_ng_switch = 'On';
 	
 	/**
 	 * __construct()
@@ -53,6 +57,7 @@ class MY_Controller extends CI_Controller {
         $this->js_variables = array(
             'base_url'      => base_url(),
             'controller'    => $this->controller,
+            'jquery_switch' => ($this->jquery_switch === 'On')
         );
 
 
@@ -64,7 +69,10 @@ class MY_Controller extends CI_Controller {
 
         $this->js_variables_render = javascript_variable($this->js_variables);
 		$this->data['javascripts_header'] = $this->js_header;
+        $this->data['css_header'] = $this->css_header;
         $this->data['javascripts_footer'] = $this->js_variables_render.$this->js_footer.$this->js_common;
+        $this->data['jquery_switch'] = ($this->jquery_switch === 'On');
+        $this->data['main_ng_switch'] = ($this->main_ng_switch === 'On');
 
         $this->data = array_merge($data, $this->data,$this->get_alert_message());
 
@@ -75,11 +83,16 @@ class MY_Controller extends CI_Controller {
     }
 
     public function render_logged_in($body, $data=array()){
+        $this->data['css_header'] = $this->css_header;
+        $this->data['jquery_switch'] = ($this->jquery_switch === 'On');
+        $this->data['main_ng_switch'] = ($this->main_ng_switch === 'On');
+
         $this->js_variables['role'] = $this->_role;
         $this->js_variables['base_uri'] = base_url($this->_role.'/'.$this->controller);
 
         $this->js_variables_render = javascript_variable($this->js_variables);
         $data['javascripts_header'] = $this->js_header;
+
         $data['javascripts_footer'] = $this->js_variables_render.$this->js_footer.$this->js_common;
 
 
@@ -201,6 +214,21 @@ class MY_Controller extends CI_Controller {
         }
 
         return $return;
+    }
+
+    public function ng_materials(){
+        /**
+         * <script type="text/javascript" src="http://eugene/assets/js/angular/angular-route.min.js"> </script>
+        <script type="text/javascript" src="http://eugene/assets/js/angular/svg-assets-cache.js"> </script>
+         */
+        return array(
+            'angular/angular-animate.min',
+            'angular/angular-aria.min',
+            'angular/angular-material.min',
+            'angular/angular-messages.min',
+            'angular/angular-route.min',
+            'angular/svg-assets-cache'
+        );
     }
 
 }

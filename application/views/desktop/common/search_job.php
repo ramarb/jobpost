@@ -5,16 +5,18 @@
                         <button type="submit" class="btn btn-default">Submit</button>
                         <button type="submit" class="btn btn-default" id="clear-public-search">Clear Search</button>
                     </form>
-                    <script type="text/javascript">
-                    	$(window).load(function(){
-                    		$("#public-search-vacancy").on('submit',function(){
-                    			if($('#public-search-vacancy div input[name="keyword"]').val().length < 4 && $('#public-search-vacancy div input[name="keyword"]').val().length > 0){
-                    				alert('Please type at least 4 characters!');
-                    				return false;	
-                    			}
-                    		});
-                    		$("#clear-public-search").on('click',function(){
-                    			$('#public-search-vacancy div input[name="keyword"]').val('');
-                    		});
-                    	});
-                    </script>
+                    <?php if($jquery_switch):?>
+                        <script type="text/javascript">
+                            $(window).load(function(){
+                                $("#public-search-vacancy").on('submit',function(){
+                                    if($('#public-search-vacancy div input[name="keyword"]').val().length < 4 && $('#public-search-vacancy div input[name="keyword"]').val().length > 0){
+                                        alert('Please type at least 4 characters!');
+                                        return false;
+                                    }
+                                });
+                                $("#clear-public-search").on('click',function(){
+                                    $('#public-search-vacancy div input[name="keyword"]').val('');
+                                });
+                            });
+                        </script>
+                    <?php endif;?>

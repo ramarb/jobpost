@@ -13,6 +13,15 @@ function p($expression,$exit = false){
 	if($exit)die;
 }
 
+function css($css){
+    $ret = '';
+    $size = count($css) - 1;
+    foreach($css as $index => $value){
+        $ret .= '<link rel="stylesheet" href="'.base_url('assets/css/'.$value.'.css').'" />'."\n".(($index < $size)?"\t":"");
+    }
+    return $ret;
+}
+
 function javascript($javascripts){
 	$ret = '';
 	$size = count($javascripts) - 1;

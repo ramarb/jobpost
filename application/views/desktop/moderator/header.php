@@ -38,12 +38,12 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->userdata('login')->first_name ?><span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Edit Profile</a></li>
-                                <li><a href="<?php echo base_url(strtolower($role) . '/users/mylist')?>">Users</a></li>
-                                <li><a href="<?php echo base_url(strtolower($role) . '/industries/mylist')?>">Industries</a></li>
-                                <li><a href="<?php echo base_url(strtolower($role) . '/categories/mylist')?>">Categories</a></li>
-                                <li><a href="<?php echo base_url(strtolower($role) . '/vacancies/mylist')?>">Vacancies</a></li>
+                                <li><a href="<?php echo base_url('moderator/users/mylist')?>">Users</a></li>
+                                <li><a href="<?php echo base_url('moderator/industries/mylist')?>">Industries</a></li>
+                                <li><a href="<?php echo base_url('moderator/categories/mylist')?>">Categories</a></li>
+                                <li><a href="<?php echo base_url('moderator/vacancies/mylist')?>">Vacancies</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="<?php echo base_url(strtolower($role) . '/account')?>">Dashboard</a></li>
+                                <li><a href="<?php echo base_url('moderator/account')?>">Dashboard</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="<?php echo base_url('logout')?>">Logout</a></li>
                             </ul>

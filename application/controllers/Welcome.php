@@ -20,7 +20,8 @@ class Welcome extends MY_Controller {
 	 */
 	public function index()
 	{
-        $this->render('public/home',array());
+        redirect('vacancies');
+        //$this->render('public/home',array());
 		//$this->load->view('welcome_message');
 	}
 }

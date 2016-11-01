@@ -86,15 +86,32 @@ class Users_model extends CI_Model {
 				      AND user_file_types.name = '".USER_FILE_TYPE_PROFILE_PHOTO."'
 				      ORDER BY files.date_added DESC
 				      LIMIT 1
-				) AS profile_picture
+				) AS profile_picture,
+                companies.name,
+                companies.name AS company,
+                companies.description,
+                companies.address,
+                companies.contact_number,
+                companies.job_categories_id AS category,
+                companies.cities_id AS city,
+                job_industries.id AS industry,
+				provinces.id AS province,
+                '' AS title,
+                '' AS salary
+
 			FROM users
 			INNER JOIN user_profiles on users.id = user_profiles.users_id
 			INNER JOIN user_roles on users.id = user_roles.users_id
 			INNER JOIN roles on roles.id = user_roles.roles_id 
 			INNER JOIN user_states on user_states.id = users.user_states_id
+			LEFT JOIN companies ON companies.users_id = users.id
+            LEFT JOIN job_categories ON job_categories.id = companies.job_categories_id
+            LEFT JOIN job_industries ON job_industries.id = job_categories.job_industries_id
+            LEFT JOIN cities ON cities.id = companies.cities_id
+            LEFT JOIN provinces ON provinces.id = cities.provinces_id
 			LEFT JOIN user_work_experieces on user_work_experieces.users_id = users.id AND user_work_experieces.is_primary = 1
 			WHERE users.id = " . $user_id . " LIMIT 1";
-		
+
 		$result = $this->common($sql);
 		$return = '';
 		if($result->row() === null){
@@ -412,7 +429,6 @@ class Users_model extends CI_Model {
         $this->common($sql);
 
         $this->check_sp_result();
-
     }
 
     /**

@@ -5,43 +5,43 @@
 		<div class="col-md-10">
 		    <form class="form-horizontal" action="<?php echo base_url($role . '/'.$this->uri->segment(2).'/validate_create')?>" method="post">
 		        
-		        <?php $this->load->view('desktop/common/industry_categories',array('industry'=>set_value('industry'),'category'=>set_value('category'))) ?>
+		        <?php $this->load->view('desktop/common/industry_categories',array('industry'=>$industry,'category'=>$category)) ?>
 		        
 		        <div class="form-group">
 		            <label for="" class="col-sm-2 control-label">Company</label>
 		            <div class="col-sm-6">
-		                <input type="text" class="form-control" name="company" id="inputEmail3" value="<?php echo set_value('company') ?>" placeholder="">
+		                <input type="text" class="form-control" name="company" id="inputEmail3" value="<?php echo $company ?>" placeholder="">
 		            </div>
 		        </div>
 		        
 		        <div class="form-group">
 		            <label for="" class="col-sm-2 control-label">Title</label>
 		            <div class="col-sm-6">
-		                <input type="text" class="form-control" name="title" id="inputEmail3" value="<?php echo set_value('title') ?>" placeholder="">
+		                <input type="text" class="form-control" name="title" id="inputEmail3" value="<?php echo $title ?>" placeholder="">
 		            </div>
 		        </div>
 		        
 		        <div class="form-group">
 		            <label for="" class="col-sm-2 control-label">Description</label>
 		            <div class="col-sm-6">
-		                <textarea class="form-control" name="description" id="inputEmail3"><?php echo set_value('description') ?></textarea> 
+		                <textarea class="form-control" name="description" id="inputEmail3"><?php echo $description ?></textarea>
 		            </div>
 		        </div>
 		        
 		        <div class="form-group">
 		            <label for="" class="col-sm-2 control-label">Salary</label>
 		            <div class="col-sm-6">
-		                <input type="text" class="form-control" name="salary" id="inputEmail3" value="<?php echo set_value('salary') ?>" placeholder="">
+		                <input type="text" class="form-control" name="salary" id="inputEmail3" value="<?php echo $salary ?>" placeholder="">
 		            </div>
 		        </div>
 		        
-		        <?php $this->load->view('desktop/common/addresses',array('province'=>set_value('province'),'city'=>set_value('city'))) ?>
+		        <?php $this->load->view('desktop/common/addresses',array('province'=>$province,'city'=>$city)) ?>
 		
 		        
 		        <div class="form-group">
 		            <label for="" class="col-sm-2 control-label">Address</label>
 		            <div class="col-sm-6">
-		                <input type="text" class="form-control" name="address" id="inputEmail3" value="<?php echo set_value('address') ?>" placeholder="">
+		                <input type="text" class="form-control" name="address" id="inputEmail3" value="<?php echo $address ?>" placeholder="">
 		            </div>
 		        </div>
 		        

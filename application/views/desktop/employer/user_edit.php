@@ -74,6 +74,42 @@
                         <textarea name="achievements"><?php echo $achievements?></textarea>
                     </div>
                 </div>
+                <div class="">
+                    <h4>Company Detail</h4>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Company Name</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="name" id="" value="<?php echo $name?>" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Overview</label>
+                    <div class="col-sm-6">
+                        <textarea name="description"><?php echo $description?></textarea>
+                    </div>
+                </div>
+
+                <?php $this->load->view('desktop/common/industry_categories',array('industry'=>$industry,'category'=>$category)) ?>
+
+                <?php $this->load->view('desktop/common/addresses',array('province'=>$province,'city'=>$city)) ?>
+
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Address</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="address" id="" value="<?php echo $address?>" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="" class="col-sm-2 control-label">Contact number</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="contact_number" id="" value="<?php echo $contact_number?>" placeholder="">
+                    </div>
+                </div>
+
 		        <div class="form-group">
 		            <div class="col-sm-offset-2 col-sm-6">
 		                <button type="submit" class="btn btn-default">Save</button>

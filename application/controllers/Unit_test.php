@@ -18,6 +18,7 @@ class Unit_test extends MY_Controller{
         $this->load->model('Vacancies_model', 'vacancy');
         $this->load->model('Miscellaneous_model', 'miscellaneous');
         $this->load->model('Files_model','file');
+        $this->load->model('Educations_model','edu');
     }
 
     public function index(){
@@ -204,6 +205,56 @@ class Unit_test extends MY_Controller{
 
         try{
             $this->users->create_company(3,$data);
+            echo 'OK';
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+
+    }
+
+    public function education_create(){
+        /**
+         * ".$this->db->escape($data['education_types_id']).",
+        ".$this->db->escape($data['course']).",
+        ".$this->db->escape($data['school']).",
+        ".$this->db->escape($data['date_from']).",
+        ".$this->db->escape($data['date_to']).",
+        ".$this->db->escape($data['cities_id']).",
+        ".$this->db->escape($data['address']).",
+        ".$this->db->escape($data['achievements']).",
+         */
+
+        try{
+            $this->edu->create(1,array(
+                'education_types_id' => '2',
+                'course' => 'Nut',
+                'school' => 'Malayan',
+                'date_from' => '1998-01-01',
+                'date_to' => '2000-01-01',
+                'cities_id' => '50',
+                'address' => 'Talisay Tabunok',
+                'achievements' => 'achievements',
+            ));
+            echo 'OK';
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+
+    }
+
+    public function education_update(){
+
+        try{
+            $this->edu->update(1,3,array(
+                'education_types_id' => '2',
+                'course' => 'Nut',
+                'school' => 'Malayan',
+                'date_from' => '1998-01-01',
+                'date_to' => '2000-01-01',
+                'cities_id' => '50',
+                'address' => 'Talisay Tabunok',
+                'achievements' => 'achievements pagka gagmay ug grado',
+            ));
             echo 'OK';
         }catch(Exception $e){
             die($e->getMessage());

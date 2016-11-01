@@ -39,8 +39,18 @@ class Vacancies extends MY_Controller_Employer {
         
 	}
 	
-	public function create(){
-		
+	public function create($error=0){
+
+        if($error === 0){
+            try{
+                $result = $this->users->read_row($this->user->id);
+                $result['description'] = '';
+                $this->data = array_merge($result,$this->data);
+            }catch (Exception $e){
+                $this->set_alert_message('Error',$e->getMessage());
+            }
+        }
+
 		$this->render($this->_role . '/vacancy_create',$this->data);
 	}
 	
@@ -131,7 +141,8 @@ class Vacancies extends MY_Controller_Employer {
 		
 		switch ($type) {
 			case 'insert':
-				$this->create();		
+                $this->data = array_merge($this->input->post(),$this->data);
+                $this->create(1);
 				break;
 			case 'update':
 				$this->edit($vacancy_id);

@@ -178,8 +178,8 @@ class MY_Controller extends CI_Controller {
             'index' => $file_index,
             'move_to' => $this->user->id . '/files/'
         );
-        //
-        if(isset($_FILES[$file_index])){
+
+        if(isset($_FILES[$file_index]) && strlen(trim($_FILES[$file_index]['name'])) > 0){
 
             $this->load->library('file_management',$data,'file_upload');
 

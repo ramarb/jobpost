@@ -61,6 +61,11 @@ class Account extends MY_Controller_Employer {
                 'rules'   => 'required'
             ),
             array(
+                'field'   => 'name',
+                'label'   => 'Company Name',
+                'rules'   => 'required'
+            ),
+            array(
                 'field'   => 'email',
                 'label'   => 'Email',
                 'rules'   => 'required|valid_email'
@@ -100,6 +105,20 @@ class Account extends MY_Controller_Employer {
         if($this->upload_file(USER_FILE_TYPE_PROFILE_PHOTO,'profile_picture')){
             try{
                 $this->users->update($this->input->post());
+                /*".$this->db->escape($data['name']).",
+                    ".$this->db->escape($data['description']).",
+                    ".$this->db->escape($data['job_categories_id']).",
+                    ".$this->db->escape($data['cities_id']).",
+                    ".$this->db->escape($data['address']).",
+                    ".$this->db->escape($data['contact_number']).",*/
+                $this->users->create_company($this->user->id,array(
+                    'name' => $this->input->post('name'),
+                    'description' => $this->input->post('description'),
+                    'job_categories_id' => $this->input->post('category'),
+                    'cities_id' => $this->input->post('city'),
+                    'address' => $this->input->post('address'),
+                    'contact_number' => $this->input->post('contact_number')
+                ));
 
                 $this->set_alert_message('Success','Changes Saved...',true);
 

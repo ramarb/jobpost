@@ -1,9 +1,10 @@
 <div class="row" ng-if="talent.profile_picture != null">
-    <div class="col-md-3 col-xs-6">
+    <div class="col-sm-3">
         <a href="#" class="thumbnail">
             <img alt="100%x180" ng-src="<?php echo base_url()?>/php_uploads/{{talent.profile_picture}}" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
         </a>
     </div>
+
 </div>
 <h2 ng-bind="full_name"></h2>
 <p>

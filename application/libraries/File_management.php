@@ -102,10 +102,16 @@ class File_management {
         $start_checking = false;
         foreach($array as $index => $value){
             if(strlen(trim($value)) > 0){
+
                 $concat .= '/' . $value;
 
                 if($start_checking && file_exists($concat) === false){
+
                     mkdir($concat);
+                }
+
+                if($value === 'php_uploads'){
+                    $start_checking = true;
                 }
             }
 

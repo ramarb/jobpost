@@ -58,7 +58,7 @@
     </div>
 
     <div class="form-group">
-        <label for="email">Position:</label>
+        <label for="email">Job Description:</label>
         <textarea style="" ng-model="description" name="description"></textarea>
     </div>
 
